@@ -16,7 +16,7 @@ Saída:
   resultados/previsao_grade_<hoje>.csv
 """
 
-import os, time, requests, warnings
+import os, sys, time, requests, warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta
 import numpy as np
@@ -142,7 +142,32 @@ with ThreadPoolExecutor(max_workers=8) as executor:
             print(f"  [{concluidos:3d}/244] {nome:<35} ✗ ERRO", flush=True)
 
 if erros:
-    print(f"\n  Municípios com erro ({len(erros)}): {', '.join(erros)}")
+    print(f"\n  Retentando {len(erros)} municípios com erro (sequencial, 3 tentativas, 30s entre chamadas)...")
+    ainda_erro = list(erros)
+    for tentativa_global in range(3):
+        if not ainda_erro:
+            break
+        print(f"  [tentativa {tentativa_global + 1}/3] {len(ainda_erro)} pendentes...")
+        time.sleep(30)
+        restantes = []
+        for nome_err in ainda_erro:
+            row = mapa[mapa["Municipio"] == nome_err].iloc[0]
+            resultado = buscar_clima(nome_err, row["Latitude"], row["Longitude"])
+            if resultado:
+                todos.extend(resultado)
+                print(f"  {nome_err:<35} ✓ (retry ok)", flush=True)
+            else:
+                restantes.append(nome_err)
+                print(f"  {nome_err:<35} ✗ ainda falhou", flush=True)
+            time.sleep(5)
+        ainda_erro = restantes
+    erros = ainda_erro
+
+if erros:
+    print(f"\n[ERRO FATAL] {len(erros)} municípios sem dados após todas as tentativas:")
+    for m in erros:
+        print(f"  - {m}")
+    sys.exit(1)
 
 print("[E1-3] Calculando features e predizendo...")
 clima1 = pd.DataFrame(todos)
