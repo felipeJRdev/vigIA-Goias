@@ -35,5 +35,5 @@ O boletim é gerado automaticamente todos os dias às 03h (horário de Brasília
 
 ---
 
-*FGA0083 — Aprendizado de Máquina | UnB 2026-1 | Turma 01 | Grupo 3*  
+*FGA0083 — Aprendizado de Máquina | UnB 2026-1 | Turma 01 | Grupo 4*  
 *Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria*
