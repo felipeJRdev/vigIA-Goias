@@ -1,7 +1,7 @@
 # vigIA — Documentação do PBL
 **Previsão de Risco de Queimadas no Estado de Goiás**  
-**Disciplina:** FGA0083 — Aprendizado de Máquina | UnB | 2026-1 | Turma 01 | Grupo 3  
-**Data:** 2026-06-03
+**Disciplina:** FGA0083 — Aprendizado de Máquina | UnB | 2026-1 | Turma 01 | Grupo 4  
+**Data:** 2026-06-10
 
 ## Membros do Grupo
 - Felipe de Jesus Rodrigues — 211062867
@@ -38,7 +38,7 @@ Os dois modelos rodam de forma **independente** com as mesmas features climátic
 Cron job diário
     │
     ├─► Modelo 1 (municipio_full.pkl)
-    │     Features climáticas por município → P(fogo) × 247 municípios
+    │     Features climáticas por município → P(fogo) × 244 municípios
     │     Saída: ranking — "NIQUELÂNDIA 98%, CAVALCANTE 95%..."
     │
     └─► Modelo 2 (grade_full.pkl)
@@ -54,7 +54,7 @@ Frontend (apresentação em dois estágios):
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ESTÁGIO 1 — Modelo de Município (triagem regional)     │
-│  Unidade: 247 municípios de Goiás                       │
+│  Unidade: 244 municípios de Goiás (bioma Cerrado)       │
 │  Modelo:  modelos/municipio_full.pkl (LightGBM)         │
 │  AUC:     0.816 (validação Jan-Jun 2026)                │
 │  Pergunta: "QUAIS municípios estão em risco?"           │
@@ -64,7 +64,7 @@ Frontend (apresentação em dois estágios):
 │  ESTÁGIO 2 — Modelo de Grade Espacial (drill-down)      │
 │  Unidade: 2.976 células 0.1° × 0.1° (~11km × 11km)     │
 │  Modelo:  modelos/grade_full.pkl (LightGBM)             │
-│  AUC:     0.715 (validação 2026 com clima proxy)        │
+│  AUC:     0.710 (validação 2026 com clima proxy)        │
 │  Pergunta: "ONDE dentro do município?"                  │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -73,8 +73,8 @@ Frontend (apresentação em dois estágios):
 
 | Aspecto | Município | Grade 0.1° |
 |---|---|---|
-| AUC validação 2026 | 0.816 | 0.715 |
-| Unidades | 247 | 2.976 |
+| AUC validação 2026 | 0.816 | 0.710 |
+| Unidades | 244 | 2.976 |
 | Resolução geográfica | ~50km | ~11km |
 | Custo computacional | Baixo | Alto |
 | Uso em produção | Alerta diário | Visualização, planejamento |
@@ -90,11 +90,13 @@ No estágio 2, o sistema usa **ranking relativo dentro do município** (não pro
 **BDqueimadas / INPE** — Sistema de monitoramento de queimadas por satélite  
 - Escopo: Estado de Goiás | 2015–2025  
 - Registros brutos: 1.390.827 focos detectados  
-- Após filtro (Goiás + remoção Mata Atlântica): **1.354.326 registros | 247 municípios**
+- Após filtro (Goiás + remoção Mata Atlântica): **1.354.326 registros | 244 municípios**
 
-**Open-Meteo Archive API** — Dados climáticos históricos gratuitos (sem autenticação)  
+Goiás possui 246 municípios. Dois foram excluídos do escopo do modelo: **Gouvelândia** e **São Simão**, que pertencem ao bioma Mata Atlântica. O modelo foi treinado exclusivamente com dados do bioma Cerrado — incluir municípios de outro bioma introduziria padrões de vegetação e sazonalidade incompatíveis com os 244 municípios do conjunto de treino, degradando a qualidade das previsões. No frontend, esses dois municípios aparecem sinalizados separadamente no mapa.
+
+**Open-Meteo API** — Dados climáticos históricos e de previsão, gratuitos (sem autenticação)  
 - Precipitação diária por coordenada geográfica
-- Período: 2015–2025 + Janeiro–Junho 2026
+- Período: 2015–2025 (treino) + Janeiro–Junho 2026 (validação) + uso diário em produção
 
 ---
 
@@ -113,15 +115,15 @@ Isso é válido porque o sistema de satélites cobre Goiás continuamente.
 **Geração dos exemplos:**
 
 ```
-247 municípios × 4.018 dias (2015-2025) = 992.446 combinações
-992.446 − 143.067 positivos = 849.379 negativos (naturais, sem amostragem)
+244 municípios × 4.018 dias (2015-2025) = 980.392 combinações
+980.392 − 143.067 positivos = 837.325 negativos (naturais, sem amostragem)
 ```
 
 | Classe | Registros | % |
 |---|---|---|
-| fogo = 1 | 143.067 | 14,4% |
-| fogo = 0 | 849.379 | 85,6% |
-| **Total** | **992.446** | 100% |
+| fogo = 1 | 143.067 | 14,6% |
+| fogo = 0 | 837.325 | 85,4% |
+| **Total** | **980.392** | 100% |
 
 **Features do modelo:**
 
@@ -143,9 +145,9 @@ Isso é válido porque o sistema de satélites cobre Goiás continuamente.
 
 | Conjunto | Período | Registros |
 |---|---|---|
-| Treino | 2015–2022 | 721.734 |
-| Validação | 2023 | 90.155 |
-| Teste | 2024–2025 | 180.557 |
+| Treino | 2015–2022 | ~712.000 |
+| Validação | 2023 | ~89.000 |
+| Teste | 2024–2025 | ~179.000 |
 
 **Busca de hiperparâmetros:** RandomizedSearchCV em subsample de 200k + retreino no conjunto completo.
 
@@ -168,7 +170,7 @@ LGBMClassifier(
 
 ### 4.3 Retreino e Validação com 2026 (Fase 3)
 
-Retreinado nas 992.446 amostras completas (2015–2025) → `modelos/municipio_full.pkl`
+Retreinado nas amostras completas (2015–2025) → `modelos/municipio_full.pkl`
 
 **Validação com dados reais nunca vistos (Jan–Jun 2026):**
 
@@ -187,7 +189,7 @@ Um município é considerado "alertado" se tiver ao menos um dia com probabilida
 
 | Métrica | Valor |
 |---|---|
-| Municípios alertados | 172 de 247 (70%) |
+| Municípios alertados | 172 de 244 (70%) |
 | Recall | **79,2%** — 164 de 207 municípios com fogo foram alertados |
 | Precisão | **95,3%** — 164 de 172 alertas eram municípios que realmente queimaram |
 | Falsos negativos | 43 municípios com fogo não alertados |
@@ -200,12 +202,13 @@ Um município é considerado "alertado" se tiver ao menos um dia com probabilida
 
 ### 4.4 Sistema de Previsão 5 Dias (Fase 4)
 
-Para cada previsão diária:
-1. **Open-Meteo Archive** (30 dias) → DiaSemChuva acumulado atual
-2. **Open-Meteo Forecast** (5 dias) → precipitação prevista
-3. **Projeção de DiaSemChuva** para cada dia futuro
-4. `modelo_pbl_full.pkl.predict_proba()` → probabilidade por (município, dia)
-5. Ranking final dos 247 municípios
+Para cada previsão diária, uma **única chamada à API** por município retorna 30 dias de histórico + 6 dias de previsão:
+
+1. **Open-Meteo Forecast** (`past_days=30, forecast_days=6`) → 36 valores de precipitação por município
+2. Dias 1–30: calculam `DiaSemChuva` acumulado atual
+3. Dias 32–36 (amanhã → hoje+5): projetam `DiaSemChuva` para cada dia futuro
+4. `municipio_full.pkl.predict_proba()` → probabilidade por (município, dia)
+5. Ranking final dos 244 municípios para os próximos 5 dias
 
 **Resultado (04–08/06/2026):**
 - NIQUELÂNDIA lidera todos os dias (95–98%) — 12–14 dias sem chuva
@@ -295,40 +298,44 @@ Uma célula é "alertada" se tiver ao menos um dia com probabilidade ≥ 0,6 no 
 
 **Nota sobre limiares:** o limiar não faz parte do modelo — é aplicado após a previsão e pode ser ajustado sem retreinar.
 
-### 5.5 Clima por Grade 0.5° ✅ CONCLUÍDO (2026-06-04)
+### 5.5 Clima por Grade 0.5°
 
 Em vez de baixar clima para as 2.976 células (2h+, rate limit inviável), usamos uma grade climática intermediária de 148 pontos únicos que cobrem todo Goiás:
 
 | Estratégia | Chamadas API | Erro máximo | Tempo |
 |---|---|---|---|
-| Município proxy | 247 | ~80km | 6 min |
+| Município proxy | 244 | ~80km | 6 min |
 | **Grade 0.5° (adotada)** | **148** | **~35km** | **~10 min** |
 | Por célula 0.1° | 2.976 | ~0km | 2h+ (rate limit) |
 
 Cada célula 0.1° usa o ponto 0.5° mais próximo. O dataset final ficou com 18.394.404 linhas (maior que a versão com proxy) porque o clima exato permitiu mapear mais células sem valores nulos.
 
-### 5.6 Previsão 5 Dias — Grade (Fase 4 Grade)
+### 5.6 Previsão 5 Dias — Grade
 
-**Modo offline** (`fase4_grade_offline.py`): reutiliza `previsao_2026-06-03.csv` (município) como proxy climático — sem novas chamadas à API. Adequado para demonstração e desenvolvimento.
-
-**Modo produção** (`fase4_grade_previsao.py`): baixa Archive + Forecast para os municípios proxy únicos das células (~6 min, mesmo pipeline do estágio 1).
+Em produção, o estágio 2 reutiliza os dados climáticos já coletados para o estágio 1 — cada célula 0,1° herda o `DiaSemChuva` e `Precipitacao` do município proxy mais próximo. Custo adicional em produção: **zero chamadas extras à API**.
 
 ---
 
 ## 6. Frontend — Mapa Interativo
 
-Gerado por `gerar_mapa.py` → `mapa_vigia.html` (HTML standalone, sem servidor necessário).
+O frontend é uma aplicação estática hospedada no **Vercel**, disponível em **https://vig-ia.vercel.app/**.
 
-**Tecnologias:** Leaflet.js + Esri World Imagery (satélite, sem API key)
+**Tecnologias:** Leaflet.js + GeoJSON + Esri World Imagery (satélite, sem API key)
+
+**Arquivos:** `index.html`, `styles.css`, `app.js`, `data.js`, `forecast.json`
+
+**Funcionamento:**
+- `forecast.json` é gerado diariamente pelo GitHub Actions e commitado no repositório
+- O Vercel redeploia automaticamente a cada novo commit, mantendo o site sempre atualizado
+- `app.js` lê `forecast.json` e renderiza o mapa com Leaflet
 
 **Funcionalidades:**
-- Células 0.1° × 0.1° como retângulos coloridos sobre imagem de satélite
+- Mapa coroplético dos 244 municípios colorido por nível de risco
 - Cores: ALTO ≥70% (vermelho), MÉDIO 40–70% (laranja), BAIXO <40% (verde)
-- **Hover:** tooltip com probabilidade, risco, dias sem chuva, município proxy
-- **Clique:** popup completo
-- Seletor de 5 dias de previsão
-- Slider de probabilidade mínima (filtra células abaixo do limiar)
-- Card de resumo (ALTO/MÉDIO/BAIXO por dia)
+- Barra de navegação para selecionar entre os próximos 5 dias de previsão
+- Ranking lateral com municípios ordenados por probabilidade decrescente
+- **Clique no município:** drill-down mostrando células 0,1° internas coloridas por risco relativo
+- Hover com tooltip: probabilidade, risco, dias sem chuva
 
 ---
 
@@ -336,87 +343,166 @@ Gerado por `gerar_mapa.py` → `mapa_vigia.html` (HTML standalone, sem servidor 
 
 Em vez de um limiar binário fixo ("vai ter fogo? sim/não"), o sistema usa os modelos como **ferramentas de ranqueamento**:
 
-- **Estágio 1:** ordena os 247 municípios por probabilidade → gestor vê os mais arriscados no topo
+- **Estágio 1:** ordena os 244 municípios por probabilidade → gestor vê os mais arriscados no topo
 - **Estágio 2:** ordena as células dentro de cada município de alto risco → identifica subáreas críticas
 
 **Vantagem do ranking:** o AUC garante que a ordenação está correta independentemente do limiar. AUC = 0,816 significa que em 81,6% das comparações (município com fogo vs sem fogo), o modelo classifica corretamente qual tem maior risco.
 
 ---
 
-## 8. Arquitetura de Produção
+## 8. Pipeline de Produção Leve
+
+### 8.1 Problema de dependência de dados
+
+Os scripts de treinamento dependem de dois datasets pesados:
+
+| Arquivo | Tamanho |
+|---|---|
+| `dataset_municipio.csv` | 1,6 GB |
+| `dataset_grade.csv` | 1,1 GB |
+
+Distribuir esses arquivos no repositório ou baixá-los a cada execução no CI é inviável.
+
+### 8.2 Solução: Lookup Tables
+
+O script `gerar_lookups.py` extrai de cada dataset apenas a coluna que não pode ser calculada em tempo real: a média histórica de focos por (unidade geográfica, mês). Resultado:
+
+| Arquivo | Tamanho | Linhas |
+|---|---|---|
+| `dados/lookup_municipio.csv` | 85 KB | 2.964 |
+| `dados/lookup_grade.csv` | 937 KB | 29.375 |
+
+Todas as outras features são calculadas em tempo real a partir das chamadas à API climática.
+
+### 8.3 Script de Previsão Leve (`previsao_leve.py`)
+
+Pipeline completo E1 + E2 sem dependência dos datasets de treino:
 
 ```
-Cron Job (diário, 06h)
-    │
-    ├─► Open-Meteo Archive + Forecast (247 municípios, ~6 min)
-    │       ↓
-    │   Calcular DiaSemChuva projetado para os próximos 5 dias
-    │       ↓
-    ├─► modelos/municipio_full.pkl  →  P(fogo) × 247 municípios
-    │       ↓ resultados/previsao_municipio_<data>.csv
-    │
-    ├─► modelos/grade_full.pkl  →  P(fogo) × 2.976 células
-    │   (usa clima de município como proxy — 0 chamadas extras à API)
-    │       ↓ resultados/previsao_grade_<data>.csv
-    │
-    └─► frontend/mapa_vigia.html ← usuário abre no navegador
+Entrada:
+  modelos/municipio_full.pkl  (1,1 MB)
+  modelos/grade_full.pkl      (314 KB)
+  dados/mapeamento_municipio.csv + mapeamento_grade.csv
+  dados/lookup_municipio.csv  + lookup_grade.csv
+  Open-Meteo API (244 chamadas paralelas, ~6 min)
+
+Saída:
+  resultados/previsao_municipio_<hoje>.csv
+  resultados/previsao_grade_<hoje>.csv
 ```
 
-**Nota importante:** os dois modelos são **independentes**. O modelo de grade usa os mesmos dados climáticos dos municípios proxy (sem novas chamadas à API), então o custo de produção diário é o mesmo: ~6 minutos de API para 247 municípios.
+**Estratégia de chamadas à API:**
+- `ThreadPoolExecutor(max_workers=8)` — 244 municípios em paralelo
+- Retry automático com backoff exponencial por chamada (4 tentativas)
+- Retry sequencial global (3 rounds, 30s entre rounds) para municípios que falharam na fase paralela
+- `sys.exit(1)` se algum município permanecer sem dados após todas as tentativas — impede commit de previsão incompleta
 
-**Próximo passo planejado:** FastAPI com endpoints:
-- `GET /risco/municipios?dias=5` → ranking do estágio 1
-- `GET /risco/grade?municipio=NIQUELÂNDIA` → células daquele município ordenadas por risco
+### 8.4 GitHub Actions — Automação Diária
+
+O arquivo `.github/workflows/previsao_diaria.yml` automatiza o ciclo completo:
+
+```
+Cron: 0 6 * * *  →  03h00 Brasília (UTC-3)
+  1. actions/checkout@v4
+  2. pip install -r pbl/requirements.txt
+  3. python pbl/previsao_leve.py          → previsao_municipio_*.csv + previsao_grade_*.csv
+  4. python pbl/exportar_json.py          → pbl/forecast.json
+  5. cp pbl/forecast.json frontend/       → atualiza frontend
+  6. git commit + push                    → aciona redeploy automático no Vercel
+```
+
+O pipeline pode ser disparado manualmente pela aba Actions do GitHub (`workflow_dispatch`).
+
+### 8.5 Deploy Contínuo — Vercel
+
+- Repositório conectado ao Vercel via GitHub App
+- Root Directory: `frontend/`
+- Sem build command (arquivos estáticos)
+- Cada `git push` com novo `forecast.json` aciona redeploy automático em ~30s
 
 ---
 
-## 9. Arquivos Gerados
+## 9. Arquitetura Completa de Produção
 
-### Estágio 1 — `estagio1_municipio/`
+```
+GitHub Actions (cron, 03h Brasília)
+    │
+    ├─► Open-Meteo Forecast (past_days=30, 244 municípios, ~6 min)
+    │       ↓ DiaSemChuva projetado para os próximos 5 dias
+    │
+    ├─► modelos/municipio_full.pkl  →  P(fogo) × 244 municípios × 5 dias
+    │
+    ├─► modelos/grade_full.pkl  →  P(fogo) × 2.976 células × 5 dias
+    │   (usa clima dos municípios proxy — 0 chamadas extras à API)
+    │
+    ├─► exportar_json.py  →  forecast.json
+    │
+    └─► git commit + push
+            │
+            └─► Vercel redeploy automático
+                    │
+                    └─► https://vig-ia.vercel.app/  (atualizado em ~30s)
+```
+
+---
+
+## 10. Arquivos do Projeto
+
+### Scripts de Desenvolvimento — `estagio1_municipio/`
 | Arquivo | Descrição |
 |---|---|
-| `fase1_dataset.py` | Constrói dados/dataset_municipio.csv |
-| `fase1b_clima.py` | Baixa Open-Meteo histórico (247 municípios) |
+| `fase1_dataset.py` | Constrói dataset_municipio.csv |
+| `fase1b_clima.py` | Baixa Open-Meteo histórico (244 municípios) |
 | `fase2_modelagem.py` | Treina RF, XGBoost, LightGBM com busca de hiperparâmetros |
 | `fase3_validacao_2026.py` | Retreino completo + validação com dados reais 2026 |
-| `fase4_previsao_5dias.py` | Previsão dos próximos 5 dias por município |
+| `fase4_previsao_5dias.py` | Previsão 5 dias por município (desenvolvimento) |
 
-### Estágio 2 — `estagio2_grade/`
+### Scripts de Desenvolvimento — `estagio2_grade/`
 | Arquivo | Descrição |
 |---|---|
-| `fase1_dataset_grade.py` | Constrói dados/dataset_grade.csv (18.4M linhas) |
+| `fase1_dataset_grade.py` | Constrói dataset_grade.csv (18.4M linhas) |
 | `fase1b_clima_05graus.py` | Baixa clima 0.5° para 148 pontos (~10 min) |
 | `fase1c_aplicar_clima.py` | Substitui clima proxy pelo clima 0.5° no dataset |
 | `fase2_modelagem.py` | Treina modelos na grade |
 | `fase3_validacao_2026.py` | Retreino completo + validação 2026 grade |
 | `fase3b_graficos_comparacao.py` | Gráficos previsão × realidade (limiar 0.6) |
-| `fase4_previsao_offline.py` | Previsão 5 dias sem API (usa previsão de município) |
+| `fase4_previsao_offline.py` | Previsão 5 dias sem API (desenvolvimento/demo) |
 
-### Frontend — `frontend/`
+### Scripts de Produção — `pbl/`
 | Arquivo | Descrição |
 |---|---|
-| `gerar_mapa.py` | Gera mapa_vigia.html a partir de resultados/previsao_grade_*.csv |
-| `mapa_vigia.html` | Mapa interativo standalone (Leaflet + satélite Esri) |
-
-### Dados — `dados/`
-| Arquivo | Descrição |
-|---|---|
-| `dataset_municipio.csv` | 992.446 linhas, fogo=0/1, 2015–2025 |
-| `dataset_grade.csv` | 18.394.404 linhas, 2.976 células, 2015–2025 (clima 0.5°) |
-| `mapeamento_municipio.csv` | 247 municípios, freq + centroide lat/lon |
-| `mapeamento_grade.csv` | 2.976 células + freq + município proxy |
-| `clima_historico.csv` | Precipitação diária 2015–2025, 247 municípios |
-| `clima_2026.csv` | Precipitação Jan-Jun 2026, 247 municípios |
-| `clima_grade.csv` | Precipitação 2015–2025 expandida para 2.976 células via grade 0.5° |
-| `clima_pontos_05.csv` | Dados brutos dos 148 pontos 0.5° |
+| `gerar_lookups.py` | Extrai lookup tables dos datasets de treino (execução única) |
+| `previsao_leve.py` | Pipeline E1+E2 completo sem datasets pesados (~6 min) |
+| `exportar_json.py` | Converte CSVs de previsão em forecast.json para o frontend |
+| `requirements.txt` | Dependências do pipeline de produção |
 
 ### Modelos — `modelos/`
 | Arquivo | Descrição |
 |---|---|
 | `municipio_full.pkl` | LightGBM 2015–2025, AUC 0.816 (**produção estágio 1**) |
 | `grade_full.pkl` | LightGBM grade 2015–2025, AUC 0.710 (**produção estágio 2**) |
-| `municipio_avaliacao.pkl` | LightGBM 2015–2022 (split temporal, avaliação) |
-| `grade_avaliacao.pkl` | LightGBM grade 2015–2022 (split temporal, avaliação) |
+
+### Dados — `dados/`
+| Arquivo | Descrição |
+|---|---|
+| `mapeamento_municipio.csv` | 244 municípios — freq + centroide lat/lon |
+| `mapeamento_grade.csv` | 2.976 células — freq + município proxy |
+| `lookup_municipio.csv` | Média histórica de focos por (município, mês) — 85 KB |
+| `lookup_grade.csv` | Média histórica de focos por (célula, mês) — 937 KB |
+
+### Frontend — `frontend/`
+| Arquivo | Descrição |
+|---|---|
+| `index.html` | Página principal |
+| `app.js` | Lógica do mapa (Leaflet) |
+| `data.js` | Dados auxiliares (GeoJSON municípios) |
+| `styles.css` | Estilos |
+| `forecast.json` | Previsão atual — gerado e atualizado diariamente pelo CI |
+
+### CI/CD — `.github/workflows/`
+| Arquivo | Descrição |
+|---|---|
+| `previsao_diaria.yml` | Cron 03h Brasília — pipeline + commit + redeploy Vercel |
 
 ### Resultados — `resultados/`
 | Arquivo | Descrição |
@@ -430,7 +516,7 @@ Cron Job (diário, 06h)
 
 ---
 
-## 10. Decisões Técnicas Relevantes
+## 11. Decisões Técnicas Relevantes
 
 | Decisão | Motivo |
 |---|---|
@@ -438,22 +524,26 @@ Cron Job (diário, 06h)
 | Ausência = negativo (BDqueimadas) | Satélite cobre Goiás continuamente |
 | Split temporal | Random split vaza dados futuros no treino |
 | Subsample 200k para busca | RandomizedSearchCV inviável em 720k+ amostras |
-| n_jobs=1 no estimador interno | Nested parallelism travou processo por 30+ minutos |
+| `n_jobs=1` no estimador interno | Nested parallelism travou processo por 30+ minutos |
 | Negativos naturais completos (grade) | NEG_RATIO=4 inflou positivos para 20%, causou AUC 0.69 |
 | Grade climática 0.5° | 148 pontos vs 2.976: sem rate limit, erro máx ~35km |
 | Limiar E1 = 0.3 | Recall 79.2%, Precisão 95.3% — equilíbrio para alerta regional |
 | Limiar E2 = 0.6 | Recall 70.3%, Precisão 42.7% — equilíbrio para drill-down geográfico |
 | Limiar ≠ retreino | O limiar é aplicado pós-previsão; mudar limiar não requer retreinar |
 | Dois estágios complementares | Município: triagem confiável; grade: localização operacional |
+| Lookup tables (85KB + 937KB) | Substituem datasets de treino de 1.7GB no pipeline de produção |
+| `past_days=30` (chamada única) | Substitui Archive + Forecast separados; mesmo janela, metade das chamadas |
+| ThreadPoolExecutor (max_workers=8) | 244 chamadas paralelas vs sequencial: ~6 min vs ~150 min |
+| sys.exit(1) em erro fatal | Impede commit de previsão incompleta no GitHub Actions |
 
 ---
 
-## 11. Resultados Consolidados
+## 12. Resultados Consolidados
 
 | | Estágio 1 — Município | Estágio 2 — Grade 0.1° |
 |---|---|---|
 | Modelo | LightGBM | LightGBM |
-| Dataset treino | 992k amostras | 18.4M amostras |
+| Dataset treino | ~980k amostras | 18.4M amostras |
 | AUC Teste (2024-25) | **0.835** | 0.831 |
 | AUC Validação 2026 | **0.816** | 0.710 |
 | Limiar operacional | 0.3 | 0.6 |
@@ -464,12 +554,12 @@ Cron Job (diário, 06h)
 
 ---
 
-## 12. Conclusões
+## 13. Conclusões
 
 O sistema vigIA combina dois modelos LightGBM em estágios complementares:
 
-**Estágio 1 (município, AUC 0,816):** com limiar 0,3, alerta 172 de 247 municípios e captura 79,2% dos fogos reais com precisão de 95,3%. Identifica quais municípios priorizar nos próximos 5 dias antes da detecção satelital.
+**Estágio 1 (município, AUC 0,816):** com limiar 0,3, alerta 172 de 244 municípios e captura 79,2% dos fogos reais com precisão de 95,3%. Identifica quais municípios priorizar nos próximos 5 dias antes da detecção satelital.
 
 **Estágio 2 (grade 0,1°, AUC 0,710):** com limiar 0,6, alerta 61% do território e captura 70,3% dos fogos com precisão de 42,7%. Detalha a localização dentro dos municípios de alto risco com resolução de ~11km × 11km.
 
-O sistema opera com dados inteiramente abertos (BDqueimadas/INPE + Open-Meteo), sem custo de infraestrutura de dados, e é capaz de gerar previsões para os próximos 5 dias em ~6 minutos de chamadas à API.
+O sistema opera com dados inteiramente abertos (BDqueimadas/INPE + Open-Meteo), sem custo de infraestrutura de dados. O pipeline de produção utiliza apenas ~1MB de lookup tables (vs 1.7GB de dados de treino), executa em ~6 minutos via GitHub Actions e publica automaticamente no Vercel. O site vigIA (https://vig-ia.vercel.app/) é atualizado todo dia às 03h Brasília sem intervenção humana.
