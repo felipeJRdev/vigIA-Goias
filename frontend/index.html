@@ -55,16 +55,16 @@
 
       <!-- legenda -->
       <div class="map-overlay legend">
-        <div class="lt">Probabilidade de fogo · próx. 5 dias</div>
+        <div class="lt">Risco relativo de fogo · próx. 5 dias</div>
         <div class="bar"></div>
-        <div class="ticks"><span>0%</span><span>50%</span><span>100%</span></div>
+        <div class="ticks"><span>menor</span><span>médio</span><span>maior</span></div>
         <div class="lbls"><span>calmo</span><span>atenção</span><span>alto risco</span></div>
         <div class="legend-e2" id="legend-e2" style="display:none">
           <div class="le2-divider"></div>
-          <div class="le2-k">Mínimo de risco · zonas</div>
+          <div class="le2-k">Filtro · mostrar apenas</div>
           <div class="le2-row">
-            <input type="range" id="prob-slider" min="0" max="90" value="0" step="5">
-            <span class="le2-val" id="prob-val">≥ 0%</span>
+            <input type="range" id="prob-slider" min="5" max="100" value="100" step="5">
+            <span class="le2-val" id="prob-val">todas</span>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
       <div class="rank-head">
         <div class="rh-k" id="rh-k">Municípios mais críticos</div>
         <div class="rh-t">Ranking do dia <span class="rh-day" id="rh-day">—</span></div>
-        <div class="rh-sub" id="rh-sub">qual região concentrar atenção · ordenado por probabilidade</div>
+        <div class="rh-sub" id="rh-sub">qual região concentrar atenção · ordenado por risco relativo</div>
         <div class="rank-tabs">
           <button class="rtab is-active" id="tab-e1">Municípios</button>
           <button class="rtab" id="tab-e2" disabled>Zonas de risco</button>
@@ -119,11 +119,21 @@
 
       <h3>Como ler o painel</h3>
       <div class="howread">
-        <div class="card"><div class="ck">Ranking → qual região</div><div class="cv">Os municípios com maior probabilidade no dia escolhido.</div></div>
+        <div class="card"><div class="ck">Ranking → qual região</div><div class="cv">Municípios ordenados pelo maior risco relativo no dia escolhido.</div></div>
         <div class="card"><div class="ck">Mapa → onde dentro</div><div class="cv">Clique num município e veja as zonas internas com risco individual.</div></div>
         <div class="card"><div class="ck">5 dias → quando</div><div class="cv">Troque o dia no topo: o mapa esquenta ou esfria, o ranking reordena.</div></div>
-        <div class="card"><div class="ck">Escala de fogo → quanto</div><div class="cv">Uma só escala — verde, âmbar, vermelho — no mapa, no ranking e na legenda.</div></div>
+        <div class="card"><div class="ck">Filtro de zonas</div><div class="cv">Slider "mostrar apenas top X%" — arraste para a esquerda para ver só as zonas de maior risco.</div></div>
       </div>
+
+      <h3>Como entender o "top X%"</h3>
+      <p>O painel mostra <b>risco relativo</b> — a posição de cada município ou zona no ranking
+      do dia, comparado a todos os demais em Goiás. <b>"top 5%"</b> significa que aquela área
+      está entre as 5% com maior risco naquele dia. <b>"top 50%"</b> significa risco mediano.</p>
+      <ul style="margin:8px 0 0 18px;line-height:1.8">
+        <li><b>Alto risco</b> — top 10% (percentil ≥ 90)</li>
+        <li><b>Atenção</b> — top 10–30% (percentil 70–90)</li>
+        <li><b>Calmo</b> — demais 70%</li>
+      </ul>
 
       <h3>Escopo geográfico</h3>
       <p>O modelo foi treinado com focos de incêndio do <b>bioma Cerrado</b> em Goiás. Municípios
@@ -132,9 +142,10 @@
       fora do escopo de previsão.</p>
 
       <h3>Transparência sobre a incerteza</h3>
-      <p>O risco é uma <b>probabilidade — não uma certeza</b>. O modelo tende a errar mais na
-      <b>estação chuvosa</b>, quando o fogo é menos previsível. Olhe sempre a data de geração:
-      este boletim é um instantâneo diário, atualizado uma vez por dia.</p>
+      <p>O risco relativo é recalculado diariamente: um município em <b>alto risco hoje não
+      implica que amanhã o será</b> — o clima muda e o ranking redistribui. O modelo tende a
+      errar mais na <b>estação chuvosa</b> (novembro–março), quando o fogo é menos previsível.
+      Olhe sempre a data de geração: este boletim é um instantâneo diário.</p>
 
       <h3>Dados e fontes</h3>
       <p class="src">
