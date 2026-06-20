@@ -1,0 +1,31 @@
+site_name: vigIA — Documentação do PBL
+site_description: Previsão de Risco de Queimadas no Estado de Goiás — FGA0083 Aprendizado de Máquina | UnB 2026-1
+site_author: Grupo 4
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    - scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  features:
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - toc.integrate
+
+nav:
+  - Documentação PBL: index.md
+  - Plano de Monitoramento: monitoramento.md
+  - Planejamento para Lançamento: planejamento.md
+  - Estratégias de manutentação e atualização: manutencao.md
