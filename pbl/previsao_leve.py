@@ -42,8 +42,8 @@ FEATURES_E2 = [
     "DiaSemChuva", "Precipitacao", "media_focos_mes_hist",
 ]
 
-def _risco(p):
-    return "ALTO" if p >= 0.70 else "MÉDIO" if p >= 0.40 else "BAIXO"
+def _risco(pct):
+    return "ALTO" if pct >= 0.90 else "MÉDIO" if pct >= 0.70 else "BAIXO"
 
 hoje      = date.today()
 dias_prev = [hoje + timedelta(days=i) for i in range(1, 6)]
@@ -90,8 +90,8 @@ def buscar_clima(nome, lat, lon, retries=4):
 
             data      = r.json()["daily"]
             prec_all  = data["precipitation_sum"]  # 30 passado + 1 hoje + 5 previsão = 36
-            prec_hist = prec_all[:30]               # últimos 30 dias
-            prec_prev = prec_all[31:36]             # amanhã → hoje+5 (pula hoje no índice 30)
+            prec_hist = prec_all[:31]               # últimos 30 dias + hoje (índice 30 é valor parcial do dia, aceitável)
+            prec_prev = prec_all[31:36]             # amanhã → hoje+5
             datas_prev = data["time"][31:36]
 
             dias_secos = 0
@@ -184,7 +184,9 @@ clima1 = clima1.merge(lookup1, on=["Municipio", "Mes"], how="left")
 clima1["media_focos_mes_hist"] = clima1["media_focos_mes_hist"].fillna(0)
 
 clima1["prob_fogo"] = modelo1.predict_proba(clima1[FEATURES_E1].values)[:, 1]
-clima1["risco"]     = clima1["prob_fogo"].apply(_risco)
+# Percentil calculado dentro de cada dia (ranking relativo entre os 244 municípios de Goiás)
+clima1["percentil"] = clima1.groupby("Data")["prob_fogo"].rank(pct=True)
+clima1["risco"]     = clima1["percentil"].apply(_risco)
 
 nome_mun = f"previsao_municipio_{hoje}.csv"
 (clima1.sort_values(["Data", "prob_fogo"], ascending=[True, False])
@@ -221,7 +223,9 @@ cells = cells.merge(lookup2, on=["Cell_Lat", "Cell_Lon", "Mes"], how="left")
 cells["media_focos_mes_hist"] = cells["media_focos_mes_hist"].fillna(0)
 
 cells["prob_fogo"] = modelo2.predict_proba(cells[FEATURES_E2].values)[:, 1]
-cells["risco"]     = cells["prob_fogo"].apply(_risco)
+# Percentil calculado dentro de cada dia (ranking relativo entre as 2976 células)
+cells["percentil"] = cells.groupby("Data")["prob_fogo"].rank(pct=True)
+cells["risco"]     = cells["percentil"].apply(_risco)
 
 nome_grade = f"previsao_grade_{hoje}.csv"
 (cells.sort_values(["Data", "prob_fogo"], ascending=[True, False])

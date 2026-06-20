@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score
-from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold
+from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, TimeSeriesSplit
 import xgboost as xgb
 import lightgbm as lgbm
 
@@ -33,10 +33,15 @@ GRAFICOS   = os.path.join(PBL, "graficos")
 MLRUNS     = os.path.join(PBL, "mlruns")
 os.makedirs(GRAFICOS, exist_ok=True)
 
-FEATURES = [
+FEATURES = [  # nomes originais — armazenados no .pkl e usados em produção
     "Mes","DiaSemana","Estacao_Seca",
     "Cell_Lat","Cell_Lon","Cell_Freq",
     "DiaSemChuva","Precipitacao","media_focos_mes_hist",
+]
+FEATURES_TREINO = [  # colunas _train para avaliação sem vazamento temporal (B2)
+    "Mes","DiaSemana","Estacao_Seca",
+    "Cell_Lat","Cell_Lon","Cell_Freq_train",
+    "DiaSemChuva","Precipitacao","media_focos_mes_hist_train",
 ]
 TARGET        = "fogo"
 SEED          = 42
@@ -52,19 +57,19 @@ print(f"  Total: {len(ds):,} | Positivos: {(ds[TARGET]==1).sum():,} ({100*(ds[TA
 print(f"  Células: {ds[['Cell_Lat','Cell_Lon']].drop_duplicates().shape[0]:,}")
 
 print("\n[2/5] Split temporal...")
-treino = ds[ds["Ano"] <= 2022]; val = ds[ds["Ano"]==2023]; teste = ds[ds["Ano"]>=2024]
-X_tr, y_tr   = treino[FEATURES].values, treino[TARGET].values
-X_val, y_val = val[FEATURES].values,    val[TARGET].values
-X_te,  y_te  = teste[FEATURES].values,  teste[TARGET].values
+treino = ds[ds["Ano"] <= 2022].sort_values("Data").reset_index(drop=True); val = ds[ds["Ano"]==2023]; teste = ds[ds["Ano"]>=2024]
+X_tr, y_tr   = treino[FEATURES_TREINO].values, treino[TARGET].values
+X_val, y_val = val[FEATURES_TREINO].values,    val[TARGET].values
+X_te,  y_te  = teste[FEATURES_TREINO].values,  teste[TARGET].values
 rng = np.random.default_rng(SEED)
-idx = rng.choice(len(X_tr), size=min(SEARCH_SAMPLE, len(X_tr)), replace=False)
+idx = np.sort(rng.choice(len(X_tr), size=min(SEARCH_SAMPLE, len(X_tr)), replace=False))
 X_search, y_search = X_tr[idx], y_tr[idx]
 print(f"  Treino: {len(treino):,} | Val: {len(val):,} | Teste: {len(teste):,} | Busca: {len(X_search):,}")
 
 print("\n[3/5] Treinamento e busca de hiperparâmetros...")
 mlflow.set_tracking_uri("file://" + MLRUNS)
 mlflow.set_experiment("vigIA_E2_grade")
-cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
+cv = TimeSeriesSplit(n_splits=5)
 
 def avaliar(nome, modelo, params, elapsed):
     prob_val = modelo.predict_proba(X_val)[:,1]; prob_te = modelo.predict_proba(X_te)[:,1]
@@ -141,7 +146,8 @@ melhor_nome = df_res.iloc[0]["Modelo"]
 melhor_mod  = {"Random Forest":rf_best,"XGBoost":xgb_best,"LightGBM":lgbm_best}[melhor_nome]
 melhor_params = {"Random Forest":search_rf.best_params_,"XGBoost":search_xgb.best_params_,
                  "LightGBM":search_lgbm.best_params_}[melhor_nome]
-joblib.dump({"modelo":melhor_mod,"features":FEATURES,"nome":melhor_nome,"params":melhor_params},
+joblib.dump({"modelo":melhor_mod,"features":FEATURES,"nome":melhor_nome,"params":melhor_params,
+             "lgbm_params":search_lgbm.best_params_},
             os.path.join(MODELOS,"grade_avaliacao.pkl"))
 print(f"  Melhor: {melhor_nome} (AUC Teste={df_res.iloc[0]['te_auc']:.4f})")
 

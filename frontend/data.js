@@ -122,11 +122,17 @@ function riskColor(r) {
   const last = RAMP[RAMP.length - 1].c;
   return `rgb(${last[0]}, ${last[1]}, ${last[2]})`;
 }
-// Três faixas semânticas (para rótulos textuais).
-function riskBucket(r) {
-  if (r < 0.40) return { key: 'calmo', label: 'Calmo' };
-  if (r < 0.70) return { key: 'atencao', label: 'Atenção' };
+// Três faixas semânticas baseadas em percentil (top 10% = alto, top 30% = atenção).
+function riskBucket(pct) {
+  if (pct < 0.70) return { key: 'calmo', label: 'Calmo' };
+  if (pct < 0.90) return { key: 'atencao', label: 'Atenção' };
   return { key: 'alto', label: 'Alto risco' };
+}
+
+// Formata percentil como "top X%" (posição relativa no ranking do dia).
+function fmtRank(pct) {
+  const top = Math.max(1, Math.round((1 - pct) * 100));
+  return 'top ' + top + '%';
 }
 
 function fmtPct(r) { return Math.round(r * 100) + '%'; }
@@ -170,7 +176,7 @@ function parseRealForecast(raw, features) {
   for (const f of features) {
     const code = String(f.properties.id);
     const [lng, lat] = featureCentroid(f);
-    muni[code] = { code, name: f.properties.name, center: [lat, lng], risk: [0, 0, 0, 0, 0] };
+    muni[code] = { code, name: f.properties.name, center: [lat, lng], risk: [0, 0, 0, 0, 0], pct: [0, 0, 0, 0, 0] };
   }
   // Preenche probabilidades reais por dia; rastreia quais municípios receberam previsão
   const predicted = new Set();
@@ -179,7 +185,11 @@ function parseRealForecast(raw, features) {
       const f = byName[norm(rec.nome)];
       if (!f) continue;
       const code = String(f.properties.id);
-      if (muni[code]) { muni[code].risk[di] = Number(rec.prob); predicted.add(code); }
+      if (muni[code]) {
+        muni[code].risk[di] = Number(rec.prob);
+        muni[code].pct[di]  = Number(rec.pct || 0);
+        predicted.add(code);
+      }
     }
   });
   // Marca municípios sem previsão (ex: 100% Mata Atlântica) como fora do escopo
@@ -246,6 +256,6 @@ async function loadForecast(features) {
 window.VIGIA_DATA = {
   GEOJSON_URL, DAYS, MODEL, GENERATED_AT,
   loadGeojson, loadForecast, generateForecast, parseRealForecast,
-  riskColor, riskBucket, fmtPct, fmtDateLong, featureCentroid,
+  riskColor, riskBucket, fmtPct, fmtRank, fmtDateLong, featureCentroid,
   WEEKDAYS, MONTHS,
 };

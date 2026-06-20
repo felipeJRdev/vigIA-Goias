@@ -14,7 +14,7 @@
     expanded: false,
     drilling: false,     // true quando E2 está ativo (E1 some do mapa)
     rankTab: 'e1',       // 'e1' | 'e2'
-    minProb: 0,          // limiar das células E2 (0–90)
+    topFilter: 100,      // filtro E2: mostrar apenas top X% (100 = todas)
     map: null,
     muniLayer: null,
     cellLayer: null,
@@ -108,9 +108,10 @@
       return { fillColor: '#6b7c85', fillOpacity: 0.18, color: 'rgba(80,95,105,.45)', weight: 0.6, dashArray: '4,4' };
     }
     const r = m ? m.risk[state.day] : 0;
+    const pct = m && m.pct ? m.pct[state.day] : r;
     const dimmed = state.selected && state.selected !== code;
     return {
-      fillColor: D.riskColor(r),
+      fillColor: D.riskColor(pct),
       fillOpacity: dimmed ? 0.06 : 0.52,
       color: dimmed ? 'rgba(120,130,140,.25)' : 'rgba(10,12,15,.85)',
       weight: dimmed ? 0.5 : 0.7,
@@ -135,11 +136,12 @@
       return;
     }
     const r = m.risk[state.day];
+    const pct = m.pct ? m.pct[state.day] : r;
     layer.setStyle({ weight: 1.8, color: '#fff', fillOpacity: 0.62 });
     layer.bringToFront();
-    const b = D.riskBucket(r);
+    const b = D.riskBucket(pct);
     layer.bindTooltip(
-      `<div class="tn">${m.name}</div><div class="tr"><span class="dot" style="background:${D.riskColor(r)}"></span>${D.fmtPct(r)} · ${b.label}</div>`,
+      `<div class="tn">${m.name}</div><div class="tr"><span class="dot" style="background:${D.riskColor(pct)}"></span>${D.fmtRank(pct)} · ${b.label}</div>`,
       { className: 'muni-tip', sticky: true, direction: 'top', offset: [0, -4] }
     ).openTooltip();
     highlightRow(code, true);
@@ -241,20 +243,22 @@
       const cellObjects = [];
       for (const c of realCells) {
         if (norm(c.mun) !== munNorm) continue;
-        if (c.prob < state.minProb / 100) continue;
+        const _pctVal = c.pct !== undefined ? c.pct : c.prob;
+        if (Math.round((1 - _pctVal) * 100) > state.topFilter) continue;
         const r = c.prob;
-        const b = D.riskBucket(r);
+        const pct = c.pct !== undefined ? c.pct : r;
+        const b = D.riskBucket(pct);
         const latStr = Math.abs(c.lat).toFixed(1) + '\u00b0' + (c.lat < 0 ? 'S' : 'N');
         const lonStr = Math.abs(c.lon).toFixed(1) + '\u00b0' + (c.lon < 0 ? 'O' : 'L');
         const rect = L.rectangle(
           [[c.lat - STEP / 2, c.lon - STEP / 2], [c.lat + STEP / 2, c.lon + STEP / 2]],
           {
-            fillColor: D.riskColor(r), fillOpacity: 0.72,
+            fillColor: D.riskColor(pct), fillOpacity: 0.72,
             color: 'rgba(10,12,15,.6)', weight: 0.5, className: 'cell-rect',
           }
         );
         rect.bindTooltip(
-          `<div class="tn">${latStr}, ${lonStr}</div><div class="tr"><span class="dot" style="background:${D.riskColor(r)}"></span>${D.fmtPct(r)} \u00b7 ${b.label}</div>`,
+          `<div class="tn">${latStr}, ${lonStr}</div><div class="tr"><span class="dot" style="background:${D.riskColor(pct)}"></span>${D.fmtRank(pct)} \u00b7 ${b.label}</div>`,
           { className: 'muni-tip', direction: 'top', sticky: true }
         );
         cellObjects.push({ prob: r, lat: c.lat, lon: c.lon, rect });
@@ -381,7 +385,7 @@
 
   function renderE1Ranking() {
     $('#rh-k').textContent = 'Municípios mais críticos';
-    $('#rh-sub').textContent = 'qual região concentrar atenção · ordenado por probabilidade';
+    $('#rh-sub').textContent = 'qual região concentrar atenção · ordenado por risco relativo';
     $('#rank-foot').style.display = '';
 
     const list = $('#rank-list');
@@ -390,13 +394,14 @@
     list.innerHTML = '';
     sorted.slice(0, limit).forEach((m, i) => {
       const r = m.risk[state.day];
-      const b = D.riskBucket(r);
+      const pct = m.pct ? m.pct[state.day] : r;
+      const b = D.riskBucket(pct);
       const row = el('div', 'row' + (state.selected === m.code ? ' is-sel' : ''));
       row.dataset.code = m.code;
       row.innerHTML =
         `<span class="pos">${String(i + 1).padStart(2, '0')}</span>` +
-        `<span class="nm"><div class="mn">${m.name}</div><div class="bk" style="color:${D.riskColor(r)}">${b.label}</div></span>` +
-        `<span class="val">${sparkline(m.risk)}<span class="pct">${D.fmtPct(r)}</span><span class="dot" style="background:${D.riskColor(r)}"></span></span>`;
+        `<span class="nm"><div class="mn">${m.name}</div><div class="bk" style="color:${D.riskColor(pct)}">${b.label}</div></span>` +
+        `<span class="val">${sparkline(m.risk)}<span class="pct">${D.fmtRank(pct)}</span><span class="dot" style="background:${D.riskColor(pct)}"></span></span>`;
       row.addEventListener('click', () => selectMuni(m.code, { fly: true }));
       row.addEventListener('mouseenter', () => peekMuni(m.code, true));
       row.addEventListener('mouseleave', () => peekMuni(m.code, false));
@@ -413,14 +418,14 @@
     const m = state.forecast.municipios[state.selected];
     if (!m) return;
     $('#rh-k').textContent = m.name;
-    $('#rh-sub').textContent = 'zonas de risco dentro do município · por probabilidade';
+    $('#rh-sub').textContent = 'zonas de risco dentro do município · por risco relativo';
     $('#rank-foot').style.display = 'none';
 
     const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     const munNorm = norm(m.name);
     const allCells = (state.forecast.celulas && state.forecast.celulas[state.day]) || [];
     const cells = allCells
-      .filter(c => norm(c.mun) === munNorm && c.prob >= state.minProb / 100)
+      .filter(c => norm(c.mun) === munNorm && Math.round((1 - (c.pct !== undefined ? c.pct : c.prob)) * 100) <= state.topFilter)
       .sort((a, b) => b.prob - a.prob);
 
     const list = $('#rank-list');
@@ -429,8 +434,8 @@
     if (cells.length === 0) {
       const msg = el('div', 'row');
       msg.style.cssText = 'justify-content:center;color:var(--txt-faint);font-family:var(--mono);font-size:11px;padding:20px;cursor:default';
-      msg.textContent = state.minProb > 0
-        ? `Nenhuma área acima de ${state.minProb}%`
+      msg.textContent = state.topFilter < 100
+        ? `Nenhuma zona no top ${state.topFilter}%`
         : 'Sem dados de zona para este município';
       list.appendChild(msg);
       return;
@@ -438,7 +443,8 @@
 
     cells.forEach((c, i) => {
       const r = c.prob;
-      const b = D.riskBucket(r);
+      const pct = c.pct !== undefined ? c.pct : r;
+      const b = D.riskBucket(pct);
       const latStr = Math.abs(c.lat).toFixed(1) + '°' + (c.lat < 0 ? 'S' : 'N');
       const lonStr = Math.abs(c.lon).toFixed(1) + '°' + (c.lon < 0 ? 'O' : 'L');
       const key = `${c.lat},${c.lon}`;
@@ -446,8 +452,8 @@
       row.dataset.key = key;
       row.innerHTML =
         `<span class="pos">${String(i + 1).padStart(2, '0')}</span>` +
-        `<span class="nm"><div class="mn" style="font-size:13px">${latStr}, ${lonStr}</div><div class="bk" style="color:${D.riskColor(r)}">${b.label}</div></span>` +
-        `<span class="val"><span class="pct">${D.fmtPct(r)}</span><span class="dot" style="background:${D.riskColor(r)}"></span></span>`;
+        `<span class="nm"><div class="mn" style="font-size:13px">${latStr}, ${lonStr}</div><div class="bk" style="color:${D.riskColor(pct)}">${b.label}</div></span>` +
+        `<span class="val"><span class="pct">${D.fmtRank(pct)}</span><span class="dot" style="background:${D.riskColor(pct)}"></span></span>`;
       row.addEventListener('click', () => flyToCell(c));
       row.addEventListener('mouseenter', () => highlightCell(key, true));
       row.addEventListener('mouseleave', () => highlightCell(key, false));
@@ -475,12 +481,13 @@
     const box = $('#viewstate');
     if (!m) { box.style.display = 'none'; return; }
     const r = m.risk[state.day];
-    const b = D.riskBucket(r);
+    const pct = m.pct ? m.pct[state.day] : r;
+    const b = D.riskBucket(pct);
     box.style.display = 'flex';
     box.innerHTML =
       `<div><div class="vk">Município · onde dentro</div>` +
       `<div class="vv">${m.name}</div>` +
-      `<div class="vsub" style="color:${D.riskColor(r)}">${D.fmtPct(r)} · ${b.label} · células de risco</div></div>` +
+      `<div class="vsub" style="color:${D.riskColor(pct)}">${D.fmtRank(pct)} · ${b.label} · células de risco</div></div>` +
       `<button id="vs-close" title="Voltar a Goiás">×</button>`;
     $('#vs-close').addEventListener('click', clearSelection);
   }
@@ -534,8 +541,8 @@
 
     const slider = $('#prob-slider');
     slider.addEventListener('input', () => {
-      state.minProb = Number(slider.value);
-      $('#prob-val').textContent = '≥ ' + state.minProb + '%';
+      state.topFilter = Number(slider.value);
+      $('#prob-val').textContent = state.topFilter >= 100 ? 'todas' : 'top ' + state.topFilter + '%';
       if (state.selected) {
         const m = state.forecast.municipios[state.selected];
         drawCells(state.layerByCode[state.selected].feature, m);
