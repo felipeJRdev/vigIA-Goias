@@ -14,13 +14,13 @@ O vigIA é um sistema de previsão de risco de queimadas para o estado de Goiás
 
 ## Como usar
 
-No mapa, cada município é colorido de acordo com o risco previsto:
+No mapa, cada município é colorido de acordo com o risco relativo do dia — a posição de cada área no ranking comparado a todos os municípios de Goiás:
 
-- **Vermelho** — risco alto
-- **Laranja** — risco médio  
-- **Verde** — risco baixo
+- **Vermelho** — alto risco (top 10%)
+- **Âmbar** — atenção (top 10–30%)
+- **Verde** — calmo (demais 70%)
 
-Use a barra de dias no topo para navegar entre os próximos 5 dias. O ranking lateral mostra os municípios em ordem decrescente de risco. Clique em qualquer município para ver o detalhamento espacial interno (células de ~11 km²).
+O ranking lateral exibe cada município com sua posição relativa ("top 5%", "top 30%", etc.) e reordena ao trocar o dia. Clique em qualquer município para ver o detalhamento espacial interno (células de ~11 km²).
 
 ## Atualização
 
@@ -30,7 +30,7 @@ O boletim é gerado automaticamente todos os dias às 03h (horário de Brasília
 
 - Cobre 244 municípios de Goiás no bioma Cerrado
 - Goiás possui 246 municípios; Gouvelândia e São Simão (bioma Mata Atlântica) estão fora do escopo do modelo e aparecem sinalizados no mapa
-- As previsões são probabilísticas — indicam risco relativo, não certeza de ocorrência
+- O risco exibido é **relativo** — indica a posição no ranking do dia, não uma probabilidade absoluta de ocorrência
 - Modelos treinados com dados de 2015 a 2025 (INPE BDqueimadas + Open-Meteo)
 
 ---
