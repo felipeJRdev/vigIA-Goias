@@ -1,0 +1,1239 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Previsão de Risco de Queimadas no Estado de Goiás — FGA0083 Aprendizado de Máquina | UnB 2026-1">
+      
+      
+        <meta name="author" content="Grupo 4">
+      
+      
+      
+        <link rel="prev" href="../frontend/">
+      
+      
+        <link rel="next" href="../plano_de_monitoramento/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Prontidão para Produção - vigIA — Documentação do PBL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#relatorio-de-prontidao-para-producao-vigia" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="vigIA — Documentação do PBL" class="md-header__button md-logo" aria-label="vigIA — Documentação do PBL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vigIA — Documentação do PBL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prontidão para Produção
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="vigIA — Documentação do PBL" class="md-nav__button md-logo" aria-label="vigIA — Documentação do PBL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    vigIA — Documentação do PBL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contexto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contexto e Motivação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fonte de Dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelo_municipio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estágio 1 — Municípios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelo_grade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estágio 2 — Grade Espacial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decisoes_tecnicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisões e Resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema em Produção
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema em Produção
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitetura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura e Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend Interativo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lançamento e Operação
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lançamento e Operação
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prontidão para Produção
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prontidão para Produção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-e-estado-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Visão geral e estado atual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrategia-de-lancamento-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estratégia de lançamento (deployment)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-integracao-com-sistemas-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Integração com sistemas existentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-testes-de-estabilidade-e-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Testes de estabilidade e validação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-criterios-de-liberacao-go-no-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Critérios de liberação (Go / No-Go)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-riscos-de-lancamento-e-plano-de-rollback-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Riscos de lançamento e plano de rollback inicial
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-evidencias-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Evidências de execução
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Evidências de execução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-saida-da-suite-de-testes-offline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Saída da suíte de testes (offline)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-teste-de-frescor-do-boletim-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Teste de frescor do boletim (produção)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-sistema-em-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Sistema em produção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plano_de_monitoramento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano de Monitoramento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategia_de_manutencao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estratégia de Manutenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossário
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="relatorio-de-prontidao-para-producao-vigia">Relatório de Prontidão para Produção — vigIA</h1>
+<p><strong>Projeto:</strong> vigIA — Previsão de Risco de Incêndio em Goiás <br>
+<strong>Disciplina:</strong> FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4 <br>
+<strong>Equipe:</strong> Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria <br>
+<strong>Documento:</strong> Critério 1 — Prontidão para produção (lançamento, testes e integração) <br></p>
+<hr />
+<h2 id="1-visao-geral-e-estado-atual">1. Visão geral e estado atual</h2>
+<p>O vigIA estima diariamente a probabilidade de focos de incêndio nos municípios de Goiás para os próximos 5 dias, em dois níveis de granularidade: por município (E1, 244 municípios do bioma Cerrado) e por célula espacial de ~11 km² (E2, detalhamento interno). O modelo foi treinado com dados de 2015 a 2025 (INPE/BDqueimadas e Open-Meteo) e apresenta acurácia de aproximadamente 0,816.</p>
+<p>A solução <strong>já se encontra em produção</strong>: a aplicação está publicada na Vercel (<code>vig-ia.vercel.app</code>) e o boletim é regenerado automaticamente todos os dias às 03h (horário de Brasília). Este relatório formaliza a estratégia de lançamento, descreve a integração com sistemas externos, documenta a suíte de testes e os controles de segurança, e define os critérios objetivos de liberação (go/no-go).</p>
+<h2 id="2-estrategia-de-lancamento-deployment">2. Estratégia de lançamento (deployment)</h2>
+<p>A arquitetura de produção é deliberadamente simples e de baixo custo, adequada à natureza <strong>batch</strong> do problema (uma previsão por dia, sem necessidade de inferência em tempo real):</p>
+<ul>
+<li><strong>Camada de processamento (batch):</strong> um job agendado no GitHub Actions (<code>.github/workflows/previsao_diaria.yml</code>) executa o pipeline <code>previsao_leve.py</code> (inferência E1 + E2), gera o <code>forecast.json</code> via <code>exportar_json.py</code>, copia o arquivo para o frontend e faz commit/push automático.</li>
+<li><strong>Camada de publicação (serving):</strong> o frontend é um site estático (HTML + Leaflet) publicado pela Vercel, que faz deploy automático a cada push no repositório. O cliente consome o <code>forecast.json</code> diretamente.</li>
+<li><strong>Agendamento:</strong> <code>cron</code> configurado para 06h UTC (03h BRT), com disparo manual disponível (<code>workflow_dispatch</code>) para reprocessamento sob demanda.</li>
+</ul>
+<p>Vantagens dessa escolha: custo operacional próximo de zero, alta disponibilidade (conteúdo estático em CDN), ausência de servidor de aplicação exposto e reprodutibilidade total do artefato diário.</p>
+<pre><code>[Open-Meteo API] [INPE BDqueimadas]
+        \              /
+         v            v
+   GitHub Actions (cron 03h BRT)
+   previsao_leve.py -&gt; exportar_json.py -&gt; forecast.json --commit--&gt; repositório
+                                                                        |
+                                                                        v
+                                                            Vercel (CDN estático)
+                                                            index.html + Leaflet
+                                                                        |
+                                                                        v
+                                       Usuários
+</code></pre>
+<h2 id="3-integracao-com-sistemas-existentes">3. Integração com sistemas existentes</h2>
+<p><strong>Entradas (sistemas a montante).</strong> O pipeline integra-se a duas fontes externas públicas:
+- <strong>Open-Meteo</strong> — variáveis climáticas (temperatura, precipitação, vento, umidade), consumidas via API HTTP.
+- <strong>INPE / BDqueimadas</strong> — histórico de focos de incêndio (2015–2025), base do treinamento e referência para validação.</p>
+<p><strong>Saída (contrato de dados).</strong> O <code>forecast.json</code> funciona como uma <strong>interface estável e aberta</strong> entre o pipeline e qualquer consumidor. Seu schema está documentado e validado por testes automatizados (ver seção 4): chaves de topo <code>gerado_em</code>, <code>dias</code>, <code>municipios</code>, <code>celulas</code>; cada registro com <code>prob ∈ [0,1]</code> e <code>risco ∈ {BAIXO, MÉDIO, ALTO}</code>. Por ser um contrato bem definido, novos sistemas podem ser integrados sem alterar o pipeline.</p>
+<p><strong>Integração potencial.</strong> Por expor um contrato JSON público, o vigIA pode ser consumido por outros sistemas e painéis externos, seja por leitura direta do arquivo, seja por um endpoint que o reexponha. Nenhuma mudança estrutural é necessária para essa integração.</p>
+<p><strong>Resiliência da integração.</strong> O frontend implementa <strong>degradação graciosa</strong>: caso o <code>forecast.json</code> real esteja ausente ou inválido, ele recorre a uma previsão sintética de contingência, garantindo que o usuário nunca veja uma tela vazia. Esse é o principal mecanismo de tolerância a falhas das fontes externas.</p>
+<h2 id="4-testes-de-estabilidade-e-validacao">4. Testes de estabilidade e validação</h2>
+<p>A solução conta com uma suíte de testes automatizados (<code>tests/test_forecast.py</code>, em <code>pytest</code>) que valida o artefato gerado antes da publicação. Os testes foram desenhados para o schema real do <code>forecast.json</code> e cobrem:</p>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>O que verifica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estrutura</td>
+<td>Chaves de topo, 5 dias ISO consecutivos, correspondência entre <code>dias</code> e as chaves de <code>municipios</code>/<code>celulas</code>, campos obrigatórios, <code>gerado_em</code> parseável</td>
+</tr>
+<tr>
+<td>Valores</td>
+<td><code>prob ∈ [0,1]</code>, <code>risco ∈ {BAIXO, MÉDIO, ALTO}</code>, coordenadas dentro de Goiás, índice de dias secos inteiro não negativo</td>
+</tr>
+<tr>
+<td>Coerência</td>
+<td>Separação das classes de risco por faixa de <strong>percentil</strong> (limiares 0,70 e 0,90); detecção de inversões (ex.: "ALTO" com percentil baixo)</td>
+</tr>
+<tr>
+<td>Cobertura/escopo</td>
+<td>~244 municípios previstos; ausência de municípios fora de escopo (Gouvelândia, São Simão)</td>
+</tr>
+<tr>
+<td>Frescor</td>
+<td>Boletim com no máximo N horas (monitor de produção, desabilitado por padrão para não falhar em avaliações offline)</td>
+</tr>
+</tbody>
+</table>
+<p>A suíte foi verificada contra um boletim válido (todos os testes de correção passam) e contra dez mutações propositais de dados, todas detectadas pelo teste correspondente. Os testes não dependem de rede e usam apenas a biblioteca padrão.</p>
+<p><strong>Gate de qualidade no CI/CD.</strong> Recomenda-se inserir a execução de <code>pytest</code> no workflow do GitHub Actions <strong>antes</strong> do commit do <code>forecast.json</code>. Com isso, um boletim malformado é barrado automaticamente e não chega à produção, transformando o pipeline em um CI/CD com portão de qualidade efetivo.</p>
+<h2 id="5-seguranca">5. Segurança</h2>
+<ul>
+<li><strong>Segredos e credenciais.</strong> O pipeline não utiliza chaves privadas — Open-Meteo e INPE são fontes públicas. O <code>GITHUB_TOKEN</code> do workflow opera com permissão mínima (<code>contents: write</code>), suficiente apenas para o commit do boletim.</li>
+<li><strong>Privacidade / LGPD.</strong> O sistema processa exclusivamente dados ambientais e geográficos públicos; <strong>nenhum dado pessoal</strong> é coletado, armazenado ou processado, o que reduz a quase nulo o risco de privacidade.</li>
+<li><strong>Superfície de ataque.</strong> O serving é estático (sem backend de aplicação exposto), eliminando vetores típicos de injeção e comprometimento de servidor. As dependências são fixadas em <code>requirements.txt</code>, reduzindo risco de cadeia de suprimentos.</li>
+<li><strong>Disponibilidade.</strong> A dependência de APIs externas (sobretudo Open-Meteo) é o principal ponto único de falha. Mitigações: fallback do frontend, alertas de frescor no monitoramento e reprocessamento manual via <code>workflow_dispatch</code>.</li>
+</ul>
+<h2 id="6-criterios-de-liberacao-go-no-go">6. Critérios de liberação (Go / No-Go)</h2>
+<p>A publicação de um novo boletim só é considerada apta quando <strong>todos</strong> os itens abaixo estão verdes:</p>
+<ul>
+<li>[ ] Pipeline (<code>previsao_leve.py</code> + <code>exportar_json.py</code>) executa sem erro.</li>
+<li>[ ] Suíte <code>pytest</code> passa integralmente (schema, valores, coerência, cobertura).</li>
+<li>[ ] <code>forecast.json</code> contém os 5 dias e cobertura ≥ 98% dos municípios em escopo.</li>
+<li>[ ] Nenhuma probabilidade fora de [0,1] e nenhum rótulo de risco inválido.</li>
+<li>[ ] Frontend carrega o boletim real (sem cair no fallback sintético).</li>
+<li>[ ] Deploy da Vercel concluído com sucesso.</li>
+</ul>
+<p>Em caso de <strong>No-Go</strong>, mantém-se o último boletim válido publicado e aciona-se o runbook de manutenção (documento de Estratégia de Manutenção, seção de runbook).</p>
+<h2 id="7-riscos-de-lancamento-e-plano-de-rollback-inicial">7. Riscos de lançamento e plano de rollback inicial</h2>
+<table>
+<thead>
+<tr>
+<th>Risco</th>
+<th>Probabilidade</th>
+<th>Impacto</th>
+<th>Mitigação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open-Meteo indisponível</td>
+<td>Média</td>
+<td>Boletim não atualiza</td>
+<td>Fallback do frontend + reprocessamento manual; manter último boletim válido</td>
+</tr>
+<tr>
+<td>Schema do JSON quebrado por mudança no código</td>
+<td>Baixa</td>
+<td>Frontend não renderiza</td>
+<td>Gate <code>pytest</code> no CI bloqueia o commit</td>
+</tr>
+<tr>
+<td>Deploy da Vercel falha</td>
+<td>Baixa</td>
+<td>App fora do ar</td>
+<td>Rollback para deploy anterior na própria Vercel</td>
+</tr>
+<tr>
+<td>Degradação silenciosa do modelo</td>
+<td>Média</td>
+<td>Previsões piores sem aviso</td>
+<td>Backtest e monitoramento contínuo (Critério 2)</td>
+</tr>
+</tbody>
+</table>
+<p>O rollback de emergência consiste em reverter o commit do <code>forecast.json</code> (volta ao boletim anterior) e/ou reverter o deploy na Vercel, ambos operações imediatas.</p>
+<h2 id="8-evidencias-de-execucao">8. Evidências de execução</h2>
+<h3 id="81-saida-da-suite-de-testes-offline">8.1 Saída da suíte de testes (offline)</h3>
+<p>Executado com <code>python -m pytest tests/ -v</code> contra o <code>forecast.json</code> mais recente:</p>
+<p><img alt="execucao testes" src="../assets/testes.png" /></p>
+<blockquote>
+<p><strong>Como reproduzir:</strong> com o repositório clonado e um <code>forecast.json</code> válido em <code>frontend/</code> ou <code>pbl/</code>:
+<code>bash
+pip install pytest
+python -m pytest tests/ -v</code></p>
+</blockquote>
+<h3 id="82-teste-de-frescor-do-boletim-producao">8.2 Teste de frescor do boletim (produção)</h3>
+<p>O <code>TestFrescor.test_boletim_recente</code> verifica se o boletim tem menos de N horas e está <strong>desabilitado por padrão</strong> para não falhar em avaliações offline. Ele só faz sentido em ambiente de produção, onde o <code>forecast.json</code> é atualizado diariamente.</p>
+<p><strong>Para ver o resultado em produção:</strong></p>
+<ol>
+<li>Acesse o repositório no GitHub → aba <strong>Actions</strong></li>
+<li>Selecione o workflow <strong>"Testes Agendados + Monitoramento vigIA"</strong> (<code>tests_scheduled.yml</code>)</li>
+<li>Clique na execução mais recente e abra o step <strong>"Rodar testes (com checagem de frescor habilitada)"</strong></li>
+</ol>
+<p>A saída mostrará o teste <code>test_boletim_recente</code> como <code>PASSED</code> (boletim recente) ou <code>FAILED</code> com a mensagem de quantas horas o boletim tem.</p>
+<p><img alt="testes frescor" src="../assets/monitoramento.png" />
+<img alt="monitoramento producao" src="../assets/testesFrescor.png" /></p>
+<p><strong>Para acionar manualmente:</strong></p>
+<p>Na aba Actions, selecione o workflow e clique em <strong>"Run workflow"</strong> (botão <code>workflow_dispatch</code>). O teste rodará com <code>VIGIA_CHECK_FRESHNESS=1</code> e o resultado aparece nos logs em ~2 minutos.</p>
+<p><strong>Localmente</strong> (se tiver um <code>forecast.json</code> recente):</p>
+<pre><code class="language-bash">VIGIA_CHECK_FRESHNESS=1 python -m pytest tests/ -v
+VIGIA_CHECK_FRESHNESS=1 VIGIA_MAX_IDADE_H=24 python -m pytest tests/ -v
+</code></pre>
+<h3 id="83-sistema-em-producao">8.3 Sistema em produção</h3>
+<p><img alt="screenshot da tela" src="../assets/telaPadrao.png" /></p>
+<blockquote>
+<p>Acesse <a href="https://vig-ia.vercel.app/">vig-ia.vercel.app</a> para ver o estado atual.</p>
+</blockquote>
+<h2 id="9-conclusao">9. Conclusão</h2>
+<p>O vigIA está operando em produção com uma arquitetura adequada ao seu perfil de uso, integração estável com fontes externas por meio de um contrato de dados aberto, suíte de testes automatizados verificada e controles de segurança proporcionais ao baixo risco da aplicação. As lacunas remanescentes — formalização do gate de testes no CI e do monitoramento contínuo — estão endereçadas, respectivamente, na recomendação da seção 4 e nos documentos de Plano de Monitoramento e Estratégia de Manutenção.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.indexes", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

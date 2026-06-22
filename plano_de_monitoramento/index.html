@@ -1,0 +1,1226 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Previsão de Risco de Queimadas no Estado de Goiás — FGA0083 Aprendizado de Máquina | UnB 2026-1">
+      
+      
+        <meta name="author" content="Grupo 4">
+      
+      
+      
+        <link rel="prev" href="../relatorio_prontidao/">
+      
+      
+        <link rel="next" href="../estrategia_de_manutencao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plano de Monitoramento - vigIA — Documentação do PBL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plano-de-monitoramento-vigia" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="vigIA — Documentação do PBL" class="md-header__button md-logo" aria-label="vigIA — Documentação do PBL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vigIA — Documentação do PBL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plano de Monitoramento
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="vigIA — Documentação do PBL" class="md-nav__button md-logo" aria-label="vigIA — Documentação do PBL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    vigIA — Documentação do PBL
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projeto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projeto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contexto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contexto e Motivação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fonte de Dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modelos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelo_municipio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estágio 1 — Municípios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelo_grade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estágio 2 — Grade Espacial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decisoes_tecnicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisões e Resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema em Produção
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema em Produção
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitetura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura e Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend Interativo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lançamento e Operação
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lançamento e Operação
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_prontidao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prontidão para Produção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano de Monitoramento
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plano de Monitoramento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivo-e-principios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Objetivo e princípios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-as-camadas-de-monitoramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. As camadas de monitoramento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-catalogo-de-metricas-limiares-e-acoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Catálogo de métricas, limiares e ações
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-instrumentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Instrumentação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-alertas-e-escalonamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Alertas e escalonamento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-monitoramento-de-desempenho-do-modelo-backtest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Monitoramento de desempenho do modelo (backtest)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cadencia-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cadência de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategia_de_manutencao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estratégia de Manutenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossário
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="plano-de-monitoramento-vigia">Plano de Monitoramento — vigIA</h1>
+<p><strong>Projeto:</strong> vigIA — Previsão de Risco de Incêndio em Goiás <br>
+<strong>Disciplina:</strong> FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4 <br>
+<strong>Equipe:</strong> Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria <br>
+<strong>Documento:</strong> Critério 2 — Plano de monitoramento em produção</p>
+<hr />
+<h2 id="1-objetivo-e-principios">1. Objetivo e princípios</h2>
+<p>Este plano define como o desempenho e a saúde do vigIA são acompanhados após o lançamento. O objetivo é detectar precocemente três classes de problema — falha operacional, degradação de dados e degradação do modelo — antes que afetem os usuários.</p>
+<p>Princípios adotados: <strong>automação</strong> (as métricas são coletadas pelo próprio pipeline, sem trabalho manual diário), <strong>limiares explícitos</strong> (cada métrica tem um valor de alerta e uma ação associada), <strong>histórico</strong> (toda execução é registrada para análise de tendência) e <strong>separação de severidade</strong> (distinção entre ALERTA, que notifica, e FALHA, que aciona a equipe).</p>
+<h2 id="2-as-camadas-de-monitoramento">2. As camadas de monitoramento</h2>
+<p><strong>Camada 1 — Saúde do sistema (operacional).</strong> Garante que o sistema rodou e publicou.
+Itens: sucesso/falha da execução do GitHub Actions; frescor do boletim (idade de <code>gerado_em</code>); disponibilidade da Vercel; disponibilidade das APIs de origem.</p>
+<p><strong>Camada 2 — Qualidade dos dados.</strong> Garante que o boletim publicado é íntegro.
+Itens: cobertura de municípios (% sobre os 244 em escopo); ausência de valores faltantes/inválidos; probabilidades dentro de [0,1]; rótulos de risco válidos; respeito ao escopo geográfico (Gouvelândia e São Simão ausentes).</p>
+<p><strong>Camada 3 — Saída do modelo.</strong> Detecta anomalias na própria predição.
+Itens: distribuição das classes de risco (BAIXO/MÉDIO/ALTO); variância da probabilidade (variância ~0 indica saída constante, provável bug); detecção de saída integralmente nula.</p>
+<p><strong>Camada 4 — Desempenho preditivo (backtest).</strong> Mede se o modelo está acertando.
+Itens: comparação das previsões com os focos efetivamente detectados pelo INPE, com segmentação por estação (seca vs chuvosa), pois o sistema reconhecidamente erra mais na estação chuvosa.</p>
+<h2 id="3-catalogo-de-metricas-limiares-e-acoes">3. Catálogo de métricas, limiares e ações</h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Camada</th>
+<th>Frequência</th>
+<th>Limiar de ALERTA</th>
+<th>Limiar de FALHA</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execução do pipeline (Actions)</td>
+<td>1</td>
+<td>Diária</td>
+<td>—</td>
+<td>Falha do job</td>
+<td>Notificar equipe; reprocessar via <code>workflow_dispatch</code></td>
+</tr>
+<tr>
+<td>Idade do boletim (<code>gerado_em</code>)</td>
+<td>1</td>
+<td>Diária</td>
+<td>&gt; 24h</td>
+<td>&gt; 48h</td>
+<td>Investigar Actions/Open-Meteo; manter boletim anterior</td>
+</tr>
+<tr>
+<td>Disponibilidade da app (Vercel)</td>
+<td>1</td>
+<td>Contínua</td>
+<td>Latência alta</td>
+<td>Fora do ar</td>
+<td>Rollback do deploy na Vercel</td>
+</tr>
+<tr>
+<td>Cobertura de municípios</td>
+<td>2</td>
+<td>Diária</td>
+<td>&lt; 98%</td>
+<td>&lt; 90%</td>
+<td>Verificar API climática; investigar falha parcial</td>
+</tr>
+<tr>
+<td>Probabilidades inválidas</td>
+<td>2</td>
+<td>Diária</td>
+<td>—</td>
+<td>&gt; 0</td>
+<td>Bloquear publicação (gate); corrigir pipeline</td>
+</tr>
+<tr>
+<td>Rótulos de risco inválidos</td>
+<td>2</td>
+<td>Diária</td>
+<td>—</td>
+<td>&gt; 0</td>
+<td>Bloquear publicação; corrigir mapeamento</td>
+</tr>
+<tr>
+<td>Municípios fora de escopo</td>
+<td>2</td>
+<td>Diária</td>
+<td>—</td>
+<td>&gt; 0</td>
+<td>Corrigir filtro de bioma</td>
+</tr>
+<tr>
+<td>Variância da probabilidade</td>
+<td>3</td>
+<td>Diária</td>
+<td>—</td>
+<td>≈ 0</td>
+<td>Investigar modelo/inferência (saída constante)</td>
+</tr>
+<tr>
+<td>% de municípios em ALTO</td>
+<td>3</td>
+<td>Diária</td>
+<td>&gt; 70%</td>
+<td>—</td>
+<td>Revisar limiares; checar features climáticas</td>
+</tr>
+<tr>
+<td>Hit-rate nos top 10 (backtest)</td>
+<td>4</td>
+<td>Semanal</td>
+<td>&lt; 0,30</td>
+<td>&lt; 0,15</td>
+<td>Investigar drift; planejar retreino</td>
+</tr>
+<tr>
+<td>AUC / Brier (backtest)</td>
+<td>4</td>
+<td>Mensal</td>
+<td>abaixo da baseline sazonal</td>
+<td>queda sustentada</td>
+<td>Reavaliar features; acionar retreino</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-instrumentacao">4. Instrumentação</h2>
+<p>O monitoramento das camadas 1 a 4 é operacionalizado pelo script <code>monitor_forecast.py</code> (apenas biblioteca padrão, executa no GitHub Actions sem dependências). Ele:</p>
+<ul>
+<li>carrega o <code>forecast.json</code>, calcula todas as métricas acima e atribui status <code>OK</code>/<code>ALERTA</code>/<code>FALHA</code> por checagem, mais um <strong>status geral</strong> (o pior entre todas);</li>
+<li>imprime um <strong>relatório legível</strong> no terminal (capturado nos logs do Actions);</li>
+<li>registra cada execução em um <strong>histórico CSV</strong> (<code>metrics_history.csv</code>) — a fonte de dados do dashboard;</li>
+<li>opcionalmente grava um <strong>snapshot JSON</strong> (<code>--out metrics.json</code>) para painéis e automação;</li>
+<li>opcionalmente executa o <strong>backtest</strong> de desempenho (<code>--observados focos.json</code>), calculando hit-rate nos top 10 e <em>lift</em> sobre o aleatório;</li>
+<li>retorna <strong>código de saída</strong> (0 = OK, 1 = ALERTA com <code>--strict</code>, 2 = FALHA), permitindo acionar alertas automaticamente.</li>
+</ul>
+<p>Exemplo de uso em produção:</p>
+<pre><code class="language-bash">python monitor_forecast.py --out metrics.json --history metrics_history.csv
+python monitor_forecast.py --observados focos_inpe.json   # quando houver dados observados
+</code></pre>
+<p>Complementarmente, os <strong>logs do GitHub Actions</strong> registram sucesso/falha de cada etapa do pipeline, e a Vercel fornece o status de cada deploy.</p>
+<h2 id="5-dashboard">5. Dashboard</h2>
+<p>O histórico CSV alimenta um painel de tendência. Não é necessária infraestrutura dedicada: uma planilha (Google Sheets/Excel) com uma linha por dia já cumpre o papel, com gráficos de:</p>
+<ul>
+<li><strong>idade do boletim</strong> ao longo do tempo (saúde operacional);</li>
+<li><strong>cobertura de municípios</strong> (qualidade de dados);</li>
+<li><strong>% em ALTO</strong> e <strong>probabilidade média</strong> (estabilidade da saída);</li>
+<li><strong>hit-rate nos top 10</strong> ao longo das semanas, segmentado por estação (desempenho).</li>
+</ul>
+<p>Opcionalmente, uma página HTML simples pode ler o <code>metrics.json</code> e renderizar os mesmos indicadores. O print do painel compõe a pasta de evidências da entrega.</p>
+<h2 id="6-alertas-e-escalonamento">6. Alertas e escalonamento</h2>
+<table>
+<thead>
+<tr>
+<th>Severidade</th>
+<th>Gatilho</th>
+<th>Canal</th>
+<th>Responsável</th>
+<th>Prazo de resposta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FALHA</td>
+<td>Status geral = FALHA ou job do Actions falhou</td>
+<td>Notificação do GitHub Actions / e-mail da equipe</td>
+<td>Plantonista da semana</td>
+<td>No mesmo dia</td>
+</tr>
+<tr>
+<td>ALERTA</td>
+<td>Status geral = ALERTA (ex.: boletim entre 24h e 48h)</td>
+<td>Registro no histórico + aviso no grupo</td>
+<td>Plantonista da semana</td>
+<td>Até 48h</td>
+</tr>
+<tr>
+<td>Informativo</td>
+<td>Tendência adversa em métrica de desempenho</td>
+<td>Revisão semanal</td>
+<td>Equipe</td>
+<td>Próxima revisão</td>
+</tr>
+</tbody>
+</table>
+<p>O escalonamento de FALHA segue o runbook descrito no documento de Estratégia de Manutenção.</p>
+<h2 id="7-monitoramento-de-desempenho-do-modelo-backtest">7. Monitoramento de desempenho do modelo (backtest)</h2>
+<p>Como o <code>forecast.json</code> contém apenas previsões, a avaliação de desempenho requer confrontá-las com os focos <strong>realmente observados</strong> pelo INPE. O procedimento:</p>
+<ol>
+<li>coletar, para cada dia previsto, a lista de municípios que registraram foco (BDqueimadas);</li>
+<li>comparar com os 10 municípios de maior risco previstos para aquele dia;</li>
+<li>calcular <strong>hit-rate nos top 10</strong> (fração dos top-10 que de fato tiveram foco) e o <strong>lift</strong> sobre uma seleção aleatória;</li>
+<li>acompanhar, em janelas semanais e mensais, métricas probabilísticas como <strong>AUC</strong> e <strong>Brier score</strong>;</li>
+<li><strong>segmentar por estação</strong> (seca vs chuvosa), reconhecendo a maior incerteza no período chuvoso.</li>
+</ol>
+<p>Uma queda sustentada dessas métricas é o principal gatilho de retreino (ver Estratégia de Manutenção).</p>
+<h2 id="8-cadencia-de-revisao">8. Cadência de revisão</h2>
+<ul>
+<li><strong>Diária (automática):</strong> camadas 1–3 a cada execução do pipeline; status geral nos logs.</li>
+<li><strong>Semanal:</strong> revisão do hit-rate nos top 10 e da tendência do histórico pelo plantonista.</li>
+<li><strong>Mensal:</strong> revisão de AUC/Brier, análise de drift e decisão sobre retreino.</li>
+<li><strong>Sazonal:</strong> reavaliação dos limiares antes do início da estação seca, período de maior demanda.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.indexes", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
