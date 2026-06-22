@@ -1,0 +1,104 @@
+{
+  "gerado_em": "2026-06-22T09:10-03:00",
+  "idade_h": 4.49,
+  "n_dias": 5,
+  "n_municipios_distintos": 244,
+  "cobertura_pct": 100.0,
+  "n_celulas_total": 14880,
+  "prob_media": 0.4083,
+  "prob_min": 0.009,
+  "prob_max": 0.9688,
+  "prob_variancia": 0.055564,
+  "pct_baixo": 69.7,
+  "pct_medio": 20.1,
+  "pct_alto": 10.2,
+  "probs_invalidas": 0,
+  "riscos_invalidos": 0,
+  "municipios_fora_escopo": [],
+  "tudo_zero": false,
+  "top_n": [
+    [
+      "NIQUELÂNDIA",
+      0.9685
+    ],
+    [
+      "CAVALCANTE",
+      0.9381
+    ],
+    [
+      "CRISTALINA",
+      0.9098
+    ],
+    [
+      "FORMOSA",
+      0.9019
+    ],
+    [
+      "BARRO ALTO",
+      0.8913
+    ],
+    [
+      "IPAMERI",
+      0.8874
+    ],
+    [
+      "SÃO JOÃO D'ALIANÇA",
+      0.8709
+    ],
+    [
+      "PORANGATU",
+      0.8704
+    ],
+    [
+      "PLANALTINA",
+      0.8626
+    ],
+    [
+      "CATALÃO",
+      0.8613
+    ]
+  ],
+  "status_geral": "OK",
+  "checagens": [
+    {
+      "nome": "Frescor do boletim",
+      "status": "OK",
+      "detalhe": "4.5h"
+    },
+    {
+      "nome": "Janela de previsão",
+      "status": "OK",
+      "detalhe": "5 dias"
+    },
+    {
+      "nome": "Cobertura de municípios",
+      "status": "OK",
+      "detalhe": "100.0% (244/244)"
+    },
+    {
+      "nome": "Probabilidades válidas",
+      "status": "OK",
+      "detalhe": "0 fora de [0,1]"
+    },
+    {
+      "nome": "Rótulos de risco válidos",
+      "status": "OK",
+      "detalhe": "0 inválidos"
+    },
+    {
+      "nome": "Escopo geográfico",
+      "status": "OK",
+      "detalhe": "sem intrusos"
+    },
+    {
+      "nome": "Saída do modelo",
+      "status": "OK",
+      "detalhe": "média=0.4083 var=0.055564"
+    },
+    {
+      "nome": "Distribuição de risco",
+      "status": "OK",
+      "detalhe": "B=69.7% M=20.1% A=10.2%"
+    }
+  ]
+}
