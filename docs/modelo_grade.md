@@ -52,28 +52,29 @@ Retreinado em 18.394.404 amostras (2015–2025) → `modelos/grade_full.pkl`
 
 | Métrica | Município | Grade (clima 0,5°) |
 |---|---|---|
-| AUC-ROC 2026 | **0,816** | 0,710 |
-| Recall (limiar 0,5) | **47,4%** | 41,6% |
-| Recall (limiar 0,3) | **73,8%** | 66,6% |
+| AUC-ROC 2026 | **0,811** | 0,711 |
+| PR-AUC 2026 | **0,232** | 0,015 |
+| Brier score | 0,094 | 0,079 |
+| Recall (limiar 0,5) | **46,9%** | 26,7% |
+| Recall (limiar 0,3) | **73,8%** | 60,8% |
 
-O gap em relação ao município é estrutural: células 0,1° têm menos histórico individual e o problema é intrinsecamente mais difícil (11km vs município inteiro).
+O gap em relação ao município é estrutural: células 0,1° têm menos histórico individual e o problema é intrinsecamente mais difícil (11km vs município inteiro). O PR-AUC de 0,015 reflete o desbalanceamento extremo da grade (~2% positivos).
 
-## Análise célula-nível (limiar 0.6, Jan-Jun 2026)
+## Métricas por (célula, dia) — Jan-Jun 2026
 
-Uma célula é "alertada" se tiver ao menos um dia com probabilidade ≥ 0,6 no período.
+Métricas calculadas para cada par (célula, dia), avaliando se a probabilidade prevista corresponde à ocorrência real de foco:
 
-| Métrica | Valor |
+| Métrica | Limiar 0,5 |
 |---|---|
-| Células alertadas | 1.825 de 2.976 (61%) |
-| Recall | **70,3%** — 780 de 1.109 células com fogo foram alertadas |
-| Precisão | **42,7%** — 780 de 1.825 alertas eram células que realmente queimaram |
-| Falsos negativos | 329 células com fogo não alertadas |
-| Falsos positivos | 1.045 células alertadas sem fogo confirmado |
+| Verdadeiros positivos | 613 |
+| Falsos positivos | 37.611 |
+| Verdadeiros negativos | 418.400 |
+| Falsos negativos | 1.680 |
+| Recall | 26,7% |
+| Precisão | 1,6% |
+| F1 | 0,030 |
 
-**Curva de captura:**
-
-- Top 10% → captura **30,3%** dos fogos reais (3× melhor que aleatório)
-- Top 20% → captura **48,5%** dos fogos reais
+Com limiar 0,3 o recall sobe para **60,8%**. A precisão baixa é esperada no nível de célula — com 2.976 células × 5 dias e apenas 2% de positivos, mesmo um modelo preciso gera muitos falsos positivos em valor absoluto. O uso correto do Estágio 2 é **dentro de um município já sinalizado** pelo Estágio 1, reduzindo o espaço de busca de ~2.976 para ~10–50 células.
 
 > **Nota:** o limiar não faz parte do modelo — é aplicado após a previsão e pode ser ajustado sem retreinar.
 

@@ -50,44 +50,49 @@ Retreinado nas amostras completas (2015–2025) → `modelos/municipio_full.pkl`
 
 | Métrica | Valor |
 |---|---|
-| AUC-ROC | **0,816** |
-| Recall (limiar 0,5) | 47,4% |
+| AUC-ROC | **0,811** |
+| PR-AUC | **0,232** |
+| Brier score | 0,094 |
+| Recall (limiar 0,5) | 46,9% |
 | Recall (limiar 0,3) | 73,8% |
-| Precisão (limiar 0,3) | 12,7% |
+| Precisão (limiar 0,5) | 20,0% |
 
-O recall cai em Jan–Jun porque é a estação chuvosa — focos são raros (4,9% dos dias vs 14% no treino). O **AUC de 0,816** confirma que a ordenação dos municípios permanece correta mesmo na chuva.
+O recall cai em Jan–Jun porque é a estação chuvosa — focos são raros (4,9% dos dias vs 14% no treino). O **AUC de 0,811** confirma que a ordenação dos municípios permanece correta mesmo na chuva. O PR-AUC de 0,232 reflete o forte desbalanceamento de classes (~85% negativos).
 
-## Análise município-nível (limiar 0.3, Jan-Jun 2026)
+## Métricas por (município, dia) — Jan-Jun 2026
 
-Um município é considerado "alertado" se tiver ao menos um dia com probabilidade ≥ 0,3 no período.
+Métricas calculadas para cada par (município, dia), avaliando se a probabilidade prevista naquele dia corresponde à ocorrência real de fogo:
 
-| Métrica | Valor |
+| Métrica | Limiar 0,5 |
 |---|---|
-| Municípios alertados | 172 de 244 (70%) |
-| Recall | **79,2%** — 164 de 207 municípios com fogo foram alertados |
-| Precisão | **95,3%** — 164 de 172 alertas eram municípios que realmente queimaram |
-| Falsos negativos | 43 municípios com fogo não alertados |
-| Falsos positivos | 8 municípios alertados sem fogo |
+| Verdadeiros positivos | 880 |
+| Falsos positivos | 3.520 |
+| Verdadeiros negativos | 32.181 |
+| Falsos negativos | 995 |
+| Recall | 46,9% |
+| Precisão | 20,0% |
+| F1 | 0,280 |
 
-> **Nota sobre a precisão de 95,3%:** este valor está inflado — um município é considerado "correto" se teve ao menos um foco em 6 meses de período. A métrica honesta é a curva de captura (PR-AUC e Captura top N%), que mede dia a dia.
+Com limiar 0,3 o recall sobe para **73,8%** (mais fogos detectados, mais falsos alarmes). O limiar operacional é escolhido conforme o trade-off de custo de alerta vs custo de miss para o uso em campo.
 
 ## Curva de captura
 
-Priorizando pares (município, dia) com maior probabilidade:
+Priorizando pares (município, dia) com maior probabilidade prevista:
 
-- Top 10% → captura **43,6%** dos fogos reais (4,4× melhor que aleatório)
-- Top 20% → captura **62,7%** dos fogos reais
+- Top 10% → captura **22,3%** dos fogos reais (2,2× melhor que aleatório)
+- Top 20% → captura **33,5%** dos fogos reais
+- Top 30% → captura **42,9%** dos fogos reais
 
 ## Comparação com baselines de climatologia
 
 | Ranqueador | AUC | Captura top 10% | Captura top 20% |
 |---|---|---|---|
-| `media_focos_mes_hist` | ~0,73 | — | — |
-| `Municipio_Freq` | ~0,749 | — | — |
-| `media + DiaSemChuva` | ~0,75 | — | — |
-| **Modelo LightGBM** | **0,816** | **43,6%** | **62,7%** |
+| `media_focos_mes_hist` | 0,721 | 12,3% | 20,8% |
+| `Municipio_Freq` | 0,745 | 19,2% | 28,2% |
+| `media + DiaSemChuva` | 0,723 | 12,3% | 20,9% |
+| **Modelo LightGBM** | **0,811** | **22,3%** | **33,5%** |
 
-Delta sobre o melhor baseline: **+0,067** (threshold mínimo adotado: 0,02). O `Municipio_Freq` é o baseline mais forte; a frequência histórica já carrega muito sinal, mas o modelo adiciona sazonalidade climática que os baselines ignoram.
+Delta sobre o melhor baseline (`Municipio_Freq`): **+0,066 AUC** (limiar mínimo adotado: 0,02). A frequência histórica já carrega sinal forte, mas o modelo adiciona sazonalidade climática que os baselines ignoram.
 
 ## Previsão 5 dias
 

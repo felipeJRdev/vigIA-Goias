@@ -10,8 +10,8 @@
 
 O vigIA combina dois modelos LightGBM em estágios complementares para estimar, **antes da detecção por satélite**, a probabilidade de focos de incêndio nos próximos 5 dias:
 
-- **Estágio 1 — Município:** ranqueia os 244 municípios de Goiás por risco relativo diário (AUC 0,816)
-- **Estágio 2 — Grade 0,1°:** detalha a localização dentro de cada município com resolução de ~11 km² (AUC 0,710)
+- **Estágio 1 — Município:** ranqueia os 244 municípios de Goiás por risco relativo diário (AUC 0,811)
+- **Estágio 2 — Grade 0,1°:** detalha a localização dentro de cada município com resolução de ~11 km² (AUC 0,711)
 
 O boletim é gerado automaticamente todo dia às 03h Brasília pelo GitHub Actions e publicado no Vercel sem intervenção humana.
 
@@ -19,10 +19,11 @@ O boletim é gerado automaticamente todo dia às 03h Brasília pelo GitHub Actio
 
 | | Estágio 1 — Município | Estágio 2 — Grade 0,1° |
 |---|---|---|
-| AUC Validação 2026 | **0,816** | 0,710 |
-| Recall (limiar operacional) | **79,2%** | 70,3% |
-| Top 10% captura | **43,6%** dos fogos | 30,3% dos fogos |
-| Ganho sobre melhor baseline | **+0,067 AUC** | — |
+| AUC Validação 2026 | **0,811** | 0,711 |
+| PR-AUC Validação 2026 | **0,232** | 0,015 |
+| Recall (limiar 0,3, dia a dia) | **73,8%** | 60,8% |
+| Top 10% captura | **22,3%** dos fogos | — |
+| Ganho sobre melhor baseline | **+0,066 AUC** | — |
 
 ## Equipe
 
