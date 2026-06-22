@@ -1,8 +1,8 @@
 # Estratégia de Manutenção e Atualização — vigIA
 
-**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás
-**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4
-**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria
+**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás <br>
+**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4 <br>
+**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria <br>
 **Documento:** Critério 3 — Estratégias de manutenção e atualização contínua do modelo
 
 ---
@@ -17,7 +17,7 @@ O retreino do modelo não é feito em calendário fixo, mas acionado por qualque
 
 | Gatilho | Fonte de detecção | Criticidade |
 |---|---|---|
-| Hit-rate@10 < 0,15 por dois ciclos semanais consecutivos | Monitor de produção (backtest) | Alta — acionar imediatamente |
+| Hit-rate nos top 10 < 0,15 por dois ciclos semanais consecutivos | Monitor de produção (backtest) | Alta — acionar imediatamente |
 | AUC ou Brier sustentados abaixo da baseline sazonal por um mês | Revisão mensal | Alta |
 | Anomalia de distribuição: > 70% dos municípios em ALTO por > 5 dias | Monitor de produção (camada 3) | Média — investigar antes de retreinar |
 | Mudança estrutural nos dados de entrada (novo formato Open-Meteo, mudança no BDqueimadas) | Falha no pipeline de coleta | Alta — retreino após adaptação do pipeline |
@@ -131,7 +131,7 @@ O arquivo `forecast.json` inclui o campo `gerado_em`, que serve como rastreador 
 | Atividade | Frequência | Responsável |
 |---|---|---|
 | Revisão dos logs do pipeline | Diária | Plantonista da semana (rodízio) |
-| Revisão do hit-rate@10 | Semanal | Plantonista da semana |
+| Revisão do hit-rate nos top 10 | Semanal | Plantonista da semana |
 | Decisão de retreino | Conforme gatilho | Equipe (consenso) |
 | Atualização de dependências | Semestral | Membro técnico designado |
 | Reavaliação de limiares de alerta | Antes da estação seca | Equipe |

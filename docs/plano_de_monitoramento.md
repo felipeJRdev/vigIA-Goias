@@ -1,8 +1,8 @@
 # Plano de Monitoramento — vigIA
 
-**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás
-**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4
-**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria
+**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás <br>
+**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4 <br>
+**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria <br>
 **Documento:** Critério 2 — Plano de monitoramento em produção
 
 ---
@@ -40,7 +40,7 @@ Itens: comparação das previsões com os focos efetivamente detectados pelo INP
 | Municípios fora de escopo | 2 | Diária | — | > 0 | Corrigir filtro de bioma |
 | Variância da probabilidade | 3 | Diária | — | ≈ 0 | Investigar modelo/inferência (saída constante) |
 | % de municípios em ALTO | 3 | Diária | > 70% | — | Revisar limiares; checar features climáticas |
-| Hit-rate@10 (backtest) | 4 | Semanal | < 0,30 | < 0,15 | Investigar drift; planejar retreino |
+| Hit-rate nos top 10 (backtest) | 4 | Semanal | < 0,30 | < 0,15 | Investigar drift; planejar retreino |
 | AUC / Brier (backtest) | 4 | Mensal | abaixo da baseline sazonal | queda sustentada | Reavaliar features; acionar retreino |
 
 ## 4. Instrumentação
@@ -51,7 +51,7 @@ O monitoramento das camadas 1 a 4 é operacionalizado pelo script `monitor_forec
 - imprime um **relatório legível** no terminal (capturado nos logs do Actions);
 - registra cada execução em um **histórico CSV** (`metrics_history.csv`) — a fonte de dados do dashboard;
 - opcionalmente grava um **snapshot JSON** (`--out metrics.json`) para painéis e automação;
-- opcionalmente executa o **backtest** de desempenho (`--observados focos.json`), calculando hit-rate@10 e *lift* sobre o aleatório;
+- opcionalmente executa o **backtest** de desempenho (`--observados focos.json`), calculando hit-rate nos top 10 e *lift* sobre o aleatório;
 - retorna **código de saída** (0 = OK, 1 = ALERTA com `--strict`, 2 = FALHA), permitindo acionar alertas automaticamente.
 
 Exemplo de uso em produção:
@@ -70,7 +70,7 @@ O histórico CSV alimenta um painel de tendência. Não é necessária infraestr
 - **idade do boletim** ao longo do tempo (saúde operacional);
 - **cobertura de municípios** (qualidade de dados);
 - **% em ALTO** e **probabilidade média** (estabilidade da saída);
-- **hit-rate@10** ao longo das semanas, segmentado por estação (desempenho).
+- **hit-rate nos top 10** ao longo das semanas, segmentado por estação (desempenho).
 
 Opcionalmente, uma página HTML simples pode ler o `metrics.json` e renderizar os mesmos indicadores. O print do painel compõe a pasta de evidências da entrega.
 
@@ -90,7 +90,7 @@ Como o `forecast.json` contém apenas previsões, a avaliação de desempenho re
 
 1. coletar, para cada dia previsto, a lista de municípios que registraram foco (BDqueimadas);
 2. comparar com os 10 municípios de maior risco previstos para aquele dia;
-3. calcular **hit-rate@10** (fração dos top-10 que de fato tiveram foco) e o **lift** sobre uma seleção aleatória;
+3. calcular **hit-rate nos top 10** (fração dos top-10 que de fato tiveram foco) e o **lift** sobre uma seleção aleatória;
 4. acompanhar, em janelas semanais e mensais, métricas probabilísticas como **AUC** e **Brier score**;
 5. **segmentar por estação** (seca vs chuvosa), reconhecendo a maior incerteza no período chuvoso.
 
@@ -99,6 +99,6 @@ Uma queda sustentada dessas métricas é o principal gatilho de retreino (ver Es
 ## 8. Cadência de revisão
 
 - **Diária (automática):** camadas 1–3 a cada execução do pipeline; status geral nos logs.
-- **Semanal:** revisão do hit-rate@10 e da tendência do histórico pelo plantonista.
+- **Semanal:** revisão do hit-rate nos top 10 e da tendência do histórico pelo plantonista.
 - **Mensal:** revisão de AUC/Brier, análise de drift e decisão sobre retreino.
 - **Sazonal:** reavaliação dos limiares antes do início da estação seca, período de maior demanda.

@@ -1,9 +1,9 @@
 # Relatório de Prontidão para Produção — vigIA
 
-**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás
-**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4
-**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria
-**Documento:** Critério 1 — Prontidão para produção (lançamento, testes e integração)
+**Projeto:** vigIA — Previsão de Risco de Incêndio em Goiás <br>
+**Disciplina:** FGA0083 — Aprendizado de Máquina · UnB 2026-1 · Turma 01 · Grupo 4 <br>
+**Equipe:** Felipe Rodrigues · João Paulo Cristo · Guilherme Vilela · Luiz Guilherme Faria <br>
+**Documento:** Critério 1 — Prontidão para produção (lançamento, testes e integração) <br>
 
 ---
 
@@ -122,6 +122,9 @@ O `TestFrescor.test_boletim_recente` verifica se o boletim tem menos de N horas 
 3. Clique na execução mais recente e abra o step **"Rodar testes (com checagem de frescor habilitada)"**
 
 A saída mostrará o teste `test_boletim_recente` como `PASSED` (boletim recente) ou `FAILED` com a mensagem de quantas horas o boletim tem.
+
+![testes frescor](assets/monitoramento.png)
+![monitoramento producao](assets/testesFrescor.png)
 
 **Para acionar manualmente:**
 
