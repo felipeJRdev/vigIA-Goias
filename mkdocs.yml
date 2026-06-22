@@ -25,7 +25,18 @@ theme:
     - toc.integrate
 
 nav:
-  - Documentação PBL: index.md
-  - Plano de Monitoramento: monitoramento.md
-  - Planejamento para Lançamento: planejamento.md
-  - Estratégias de manutentação e atualização: manutencao.md
+  - Início: index.md
+  - Projeto:
+      - Contexto e Motivação: contexto.md
+      - Fonte de Dados: dados.md
+  - Modelos:
+      - "Estágio 1 — Municípios": modelo_municipio.md
+      - "Estágio 2 — Grade Espacial": modelo_grade.md
+      - Decisões e Resultados: decisoes_tecnicas.md
+  - Sistema em Produção:
+      - Arquitetura e Pipeline: arquitetura.md
+      - Frontend Interativo: frontend.md
+  - "Lançamento e Operação":
+      - Prontidão para Produção: relatorio_prontidao.md
+      - Plano de Monitoramento: plano_de_monitoramento.md
+      - "Estratégia de Manutenção": estrategia_de_manutencao.md
