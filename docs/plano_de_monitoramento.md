@@ -9,7 +9,7 @@
 
 ## 1. Objetivo e princípios
 
-Este plano define como o desempenho e a saúde do vigIA são acompanhados após o lançamento. O objetivo é detectar precocemente três classes de problema — falha operacional, degradação de dados e degradação do modelo — antes que afetem os usuários (Defesa Civil, brigadas, fiscalização e público).
+Este plano define como o desempenho e a saúde do vigIA são acompanhados após o lançamento. O objetivo é detectar precocemente três classes de problema — falha operacional, degradação de dados e degradação do modelo — antes que afetem os usuários.
 
 Princípios adotados: **automação** (as métricas são coletadas pelo próprio pipeline, sem trabalho manual diário), **limiares explícitos** (cada métrica tem um valor de alerta e uma ação associada), **histórico** (toda execução é registrada para análise de tendência) e **separação de severidade** (distinção entre ALERTA, que notifica, e FALHA, que aciona a equipe).
 

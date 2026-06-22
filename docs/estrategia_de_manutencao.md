@@ -109,13 +109,33 @@ As dependências são fixadas em `pbl/requirements.txt`. Manutenção semestral:
 
 ## 7. Versionamento e rastreabilidade
 
-Toda mudança significativa recebe uma tag semântica no repositório:
+Toda mudança significativa recebe uma tag semântica no repositório. As tags são marcadores históricos independentes do deploy — o Vercel não as lê e o pipeline diário não é afetado.
+
+### Convenção de versões
 
 - `v1.x` — modelo inicial treinado com dados 2015–2025.
 - `v2.x` — próximo retreino (com dados 2026+) ou mudança de features.
 - `v3.x` — mudança de arquitetura de modelo ou de contrato de dados.
 
-O arquivo `forecast.json` inclui o campo `gerado_em`, que serve como rastreador de versão operacional. O histórico de boletins pode ser recuperado via `git log`.
+### Como criar uma tag
+
+Após fazer o merge do novo modelo na branch `main`:
+
+```bash
+git tag v1.0.0 -m "Modelo inicial: LightGBM 2015-2025, AUC 0.811"
+git push origin v1.0.0
+```
+
+A tag aparece na aba **Tags** do repositório no GitHub. Para versões futuras, substituir o número e a descrição conforme a mudança realizada:
+
+```bash
+git tag v2.0.0 -m "Retreino com dados 2026, AUC X.XXX"
+git push origin v2.0.0
+```
+
+### Rastreabilidade operacional
+
+O campo `gerado_em` do `forecast.json` registra data e hora de cada boletim publicado. O histórico completo de boletins é recuperável via `git log -- frontend/forecast.json`, que lista todos os commits de atualização diária com o hash correspondente.
 
 ## 8. Roadmap de evolução
 

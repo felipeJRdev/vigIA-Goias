@@ -35,7 +35,7 @@ Vantagens dessa escolha: custo operacional próximo de zero, alta disponibilidad
                                                             index.html + Leaflet
                                                                         |
                                                                         v
-                                       Usuários: Defesa Civil, brigadas, fiscalização, público
+                                       Usuários
 ```
 
 ## 3. Integração com sistemas existentes
@@ -46,7 +46,7 @@ Vantagens dessa escolha: custo operacional próximo de zero, alta disponibilidad
 
 **Saída (contrato de dados).** O `forecast.json` funciona como uma **interface estável e aberta** entre o pipeline e qualquer consumidor. Seu schema está documentado e validado por testes automatizados (ver seção 4): chaves de topo `gerado_em`, `dias`, `municipios`, `celulas`; cada registro com `prob ∈ [0,1]` e `risco ∈ {BAIXO, MÉDIO, ALTO}`. Por ser um contrato bem definido, novos sistemas podem ser integrados sem alterar o pipeline.
 
-**Integração potencial com órgãos.** Por expor um contrato JSON público, o vigIA pode ser consumido por painéis da Defesa Civil, do Corpo de Bombeiros ou de secretarias ambientais (priorização de fiscalização e deslocamento de brigadas), seja por leitura direta do arquivo, seja por um endpoint que o reexponha. Nenhuma mudança estrutural é necessária para essa integração.
+**Integração potencial.** Por expor um contrato JSON público, o vigIA pode ser consumido por outros sistemas e painéis externos, seja por leitura direta do arquivo, seja por um endpoint que o reexponha. Nenhuma mudança estrutural é necessária para essa integração.
 
 **Resiliência da integração.** O frontend implementa **degradação graciosa**: caso o `forecast.json` real esteja ausente ou inválido, ele recorre a uma previsão sintética de contingência, garantindo que o usuário nunca veja uma tela vazia. Esse é o principal mecanismo de tolerância a falhas das fontes externas.
 

@@ -50,3 +50,4 @@ O boletim é gerado automaticamente todo dia às 03h Brasília pelo GitHub Actio
 | [Prontidão para Produção](relatorio_prontidao.md) | Estratégia de lançamento, testes, segurança, Go/No-Go |
 | [Plano de Monitoramento](plano_de_monitoramento.md) | Métricas, limiares, alertas e cadência de revisão |
 | [Estratégia de Manutenção](estrategia_de_manutencao.md) | Retreino, runbook de incidentes, roadmap de evolução |
+| [Glossário](glossario.md) | Definição de termos técnicos e siglas utilizados nesta documentação |
