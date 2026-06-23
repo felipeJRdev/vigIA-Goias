@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-06-22T09:10-03:00",
-  "idade_h": 4.49,
+  "gerado_em": "2026-06-23T06:53-03:00",
+  "idade_h": 0.76,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.4083,
-  "prob_min": 0.009,
+  "prob_media": 0.401,
+  "prob_min": 0.0098,
   "prob_max": 0.9688,
-  "prob_variancia": 0.055564,
+  "prob_variancia": 0.053775,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -27,7 +27,7 @@
     ],
     [
       "CRISTALINA",
-      0.9098
+      0.9107
     ],
     [
       "FORMOSA",
@@ -35,27 +35,27 @@
     ],
     [
       "BARRO ALTO",
-      0.8913
+      0.9003
     ],
     [
-      "IPAMERI",
-      0.8874
+      "PORANGATU",
+      0.8835
+    ],
+    [
+      "NOVA CRIXÁS",
+      0.872
+    ],
+    [
+      "PLANALTINA",
+      0.8718
     ],
     [
       "SÃO JOÃO D'ALIANÇA",
       0.8709
     ],
     [
-      "PORANGATU",
-      0.8704
-    ],
-    [
-      "PLANALTINA",
-      0.8626
-    ],
-    [
-      "CATALÃO",
-      0.8613
+      "LUZIÂNIA",
+      0.8596
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "4.5h"
+      "detalhe": "0.8h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.4083 var=0.055564"
+      "detalhe": "média=0.401 var=0.053775"
     },
     {
       "nome": "Distribuição de risco",
