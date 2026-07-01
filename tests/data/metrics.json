@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-06-30T06:45-03:00",
-  "idade_h": 0.81,
+  "gerado_em": "2026-07-01T06:58-03:00",
+  "idade_h": 0.78,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.4981,
+  "prob_media": 0.4938,
   "prob_min": 0.011,
   "prob_max": 0.9685,
-  "prob_variancia": 0.050956,
+  "prob_variancia": 0.050473,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -31,11 +31,7 @@
     ],
     [
       "CRISTALINA",
-      0.9329
-    ],
-    [
-      "FORMOSA",
-      0.927
+      0.9336
     ],
     [
       "JATAÍ",
@@ -43,19 +39,23 @@
     ],
     [
       "RIO VERDE",
-      0.9129
+      0.9138
     ],
     [
       "LUZIÂNIA",
-      0.9117
+      0.9127
     ],
     [
       "CAIAPÔNIA",
-      0.9115
+      0.9124
     ],
     [
       "FLORES DE GOIÁS",
       0.9035
+    ],
+    [
+      "PORANGATU",
+      0.9016
     ]
   ],
   "status_geral": "OK",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.4981 var=0.050956"
+      "detalhe": "média=0.4938 var=0.050473"
     },
     {
       "nome": "Distribuição de risco",
