@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-07-20T06:09-03:00",
-  "idade_h": 1.12,
+  "gerado_em": "2026-07-21T05:33-03:00",
+  "idade_h": 0.97,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5138,
+  "prob_media": 0.5002,
   "prob_min": 0.011,
   "prob_max": 0.9687,
-  "prob_variancia": 0.051064,
+  "prob_variancia": 0.05073,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -46,12 +46,12 @@
       0.9138
     ],
     [
-      "CAIAPÔNIA",
-      0.9124
+      "LUZIÂNIA",
+      0.9127
     ],
     [
-      "LUZIÂNIA",
-      0.9117
+      "CAIAPÔNIA",
+      0.9124
     ],
     [
       "FLORES DE GOIÁS",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "1.1h"
+      "detalhe": "1.0h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5138 var=0.051064"
+      "detalhe": "média=0.5002 var=0.05073"
     },
     {
       "nome": "Distribuição de risco",
