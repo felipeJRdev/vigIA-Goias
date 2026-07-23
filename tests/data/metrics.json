@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-07-22T05:48-03:00",
-  "idade_h": 0.7,
+  "gerado_em": "2026-07-23T05:40-03:00",
+  "idade_h": 0.79,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.4959,
-  "prob_min": 0.011,
-  "prob_max": 0.9687,
-  "prob_variancia": 0.050269,
+  "prob_media": 0.4908,
+  "prob_min": 0.0101,
+  "prob_max": 0.9685,
+  "prob_variancia": 0.050885,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -19,43 +19,43 @@
   "top_n": [
     [
       "NIQUELÂNDIA",
-      0.9687
-    ],
-    [
-      "MINEIROS",
-      0.9453
+      0.968
     ],
     [
       "CAVALCANTE",
-      0.9378
+      0.9366
     ],
     [
       "CRISTALINA",
-      0.9336
+      0.9322
     ],
     [
       "FORMOSA",
-      0.9298
+      0.9276
     ],
     [
-      "JATAÍ",
-      0.9197
-    ],
-    [
-      "LUZIÂNIA",
-      0.9136
+      "MINEIROS",
+      0.9169
     ],
     [
       "RIO VERDE",
-      0.9132
+      0.9126
     ],
     [
       "CAIAPÔNIA",
-      0.9124
+      0.9115
+    ],
+    [
+      "LUZIÂNIA",
+      0.9108
     ],
     [
       "FLORES DE GOIÁS",
-      0.9042
+      0.9004
+    ],
+    [
+      "PORANGATU",
+      0.9001
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "0.7h"
+      "detalhe": "0.8h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.4959 var=0.050269"
+      "detalhe": "média=0.4908 var=0.050885"
     },
     {
       "nome": "Distribuição de risco",
