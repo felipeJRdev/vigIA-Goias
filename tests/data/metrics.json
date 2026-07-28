@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-07-27T07:05-03:00",
-  "idade_h": 0.7,
+  "gerado_em": "2026-07-28T05:46-03:00",
+  "idade_h": 0.88,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5249,
+  "prob_media": 0.5312,
   "prob_min": 0.011,
   "prob_max": 0.9724,
-  "prob_variancia": 0.050491,
+  "prob_variancia": 0.050307,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -35,7 +35,15 @@
     ],
     [
       "CRISTALINA",
-      0.922
+      0.9285
+    ],
+    [
+      "JATAÍ",
+      0.9092
+    ],
+    [
+      "RIO VERDE",
+      0.9069
     ],
     [
       "FLORES DE GOIÁS",
@@ -46,16 +54,8 @@
       0.9016
     ],
     [
-      "BARRO ALTO",
-      0.8973
-    ],
-    [
-      "SÃO JOÃO D'ALIANÇA",
-      0.896
-    ],
-    [
-      "RIO VERDE",
-      0.8935
+      "CAIAPÔNIA",
+      0.901
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "0.7h"
+      "detalhe": "0.9h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5249 var=0.050491"
+      "detalhe": "média=0.5312 var=0.050307"
     },
     {
       "nome": "Distribuição de risco",
