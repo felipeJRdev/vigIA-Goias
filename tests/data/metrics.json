@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-03T06:52-03:00",
-  "idade_h": 0.92,
+  "gerado_em": "2026-08-04T05:48-03:00",
+  "idade_h": 0.87,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5882,
+  "prob_media": 0.5772,
   "prob_min": 0.0115,
   "prob_max": 0.974,
-  "prob_variancia": 0.048538,
+  "prob_variancia": 0.04907,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -23,15 +23,11 @@
     ],
     [
       "FORMOSA",
-      0.9603
-    ],
-    [
-      "MINEIROS",
-      0.9498
+      0.9496
     ],
     [
       "CRISTALINA",
-      0.9467
+      0.9463
     ],
     [
       "CAVALCANTE",
@@ -46,12 +42,16 @@
       0.9394
     ],
     [
+      "FLORES DE GOIÁS",
+      0.9369
+    ],
+    [
       "CAIAPÔNIA",
       0.9305
     ],
     [
       "LUZIÂNIA",
-      0.9295
+      0.929
     ],
     [
       "SÃO JOÃO D'ALIANÇA",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5882 var=0.048538"
+      "detalhe": "média=0.5772 var=0.04907"
     },
     {
       "nome": "Distribuição de risco",
