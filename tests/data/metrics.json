@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-05T05:46-03:00",
-  "idade_h": 0.89,
+  "gerado_em": "2026-08-06T05:46-03:00",
+  "idade_h": 0.95,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5738,
+  "prob_media": 0.5739,
   "prob_min": 0.0115,
-  "prob_max": 0.974,
-  "prob_variancia": 0.048707,
+  "prob_max": 0.9742,
+  "prob_variancia": 0.048743,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -19,43 +19,43 @@
   "top_n": [
     [
       "NIQUELÂNDIA",
-      0.974
+      0.9736
     ],
     [
       "FORMOSA",
-      0.9572
+      0.9581
     ],
     [
       "MINEIROS",
-      0.9498
+      0.9491
     ],
     [
       "CRISTALINA",
-      0.9463
+      0.9456
     ],
     [
       "CAVALCANTE",
-      0.9454
+      0.9448
     ],
     [
       "RIO VERDE",
-      0.9389
+      0.9386
+    ],
+    [
+      "JATAÍ",
+      0.9348
     ],
     [
       "FLORES DE GOIÁS",
-      0.9369
+      0.9332
     ],
     [
       "CAIAPÔNIA",
-      0.9299
+      0.9297
     ],
     [
       "PADRE BERNARDO",
-      0.9274
-    ],
-    [
-      "PLANALTINA",
-      0.9264
+      0.9245
     ]
   ],
   "status_geral": "OK",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5738 var=0.048707"
+      "detalhe": "média=0.5739 var=0.048743"
     },
     {
       "nome": "Distribuição de risco",
