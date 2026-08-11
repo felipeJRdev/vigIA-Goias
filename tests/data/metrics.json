@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-10T04:38-03:00",
-  "idade_h": 1.07,
+  "gerado_em": "2026-08-11T04:16-03:00",
+  "idade_h": 0.93,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5887,
+  "prob_media": 0.5785,
   "prob_min": 0.0115,
   "prob_max": 0.9742,
-  "prob_variancia": 0.048286,
+  "prob_variancia": 0.048688,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -38,6 +38,10 @@
       0.9389
     ],
     [
+      "MINEIROS",
+      0.9364
+    ],
+    [
       "FLORES DE GOIÁS",
       0.9342
     ],
@@ -47,15 +51,11 @@
     ],
     [
       "LUZIÂNIA",
-      0.9288
+      0.9295
     ],
     [
       "SÃO JOÃO D'ALIANÇA",
       0.9255
-    ],
-    [
-      "PADRE BERNARDO",
-      0.9243
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "1.1h"
+      "detalhe": "0.9h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5887 var=0.048286"
+      "detalhe": "média=0.5785 var=0.048688"
     },
     {
       "nome": "Distribuição de risco",
