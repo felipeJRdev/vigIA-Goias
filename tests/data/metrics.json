@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-12T04:35-03:00",
-  "idade_h": 0.78,
+  "gerado_em": "2026-08-13T04:35-03:00",
+  "idade_h": 0.82,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5752,
+  "prob_media": 0.5736,
   "prob_min": 0.0115,
   "prob_max": 0.9742,
-  "prob_variancia": 0.048622,
+  "prob_variancia": 0.048417,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -19,43 +19,43 @@
   "top_n": [
     [
       "NIQUELÂNDIA",
-      0.9742
+      0.9738
     ],
     [
       "FORMOSA",
-      0.9606
-    ],
-    [
-      "CRISTALINA",
-      0.9463
-    ],
-    [
-      "CAVALCANTE",
-      0.9457
+      0.9593
     ],
     [
       "MINEIROS",
-      0.9453
+      0.9479
     ],
     [
-      "RIO VERDE",
-      0.9389
+      "CRISTALINA",
+      0.9456
+    ],
+    [
+      "CAVALCANTE",
+      0.9451
     ],
     [
       "JATAÍ",
-      0.935
+      0.9396
+    ],
+    [
+      "RIO VERDE",
+      0.9386
     ],
     [
       "FLORES DE GOIÁS",
-      0.9342
+      0.9321
     ],
     [
       "CAIAPÔNIA",
-      0.9299
+      0.9297
     ],
     [
       "LUZIÂNIA",
-      0.9295
+      0.9272
     ]
   ],
   "status_geral": "OK",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5752 var=0.048622"
+      "detalhe": "média=0.5736 var=0.048417"
     },
     {
       "nome": "Distribuição de risco",
