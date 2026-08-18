@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-17T04:05-03:00",
-  "idade_h": 0.84,
+  "gerado_em": "2026-08-18T03:46-03:00",
+  "idade_h": 0.92,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5892,
+  "prob_media": 0.5786,
   "prob_min": 0.0115,
   "prob_max": 0.9742,
-  "prob_variancia": 0.048255,
+  "prob_variancia": 0.048888,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -43,19 +43,19 @@
     ],
     [
       "RIO VERDE",
-      0.9389
+      0.9379
     ],
     [
       "FLORES DE GOIÁS",
       0.9342
     ],
     [
-      "CAIAPÔNIA",
-      0.9299
-    ],
-    [
       "LUZIÂNIA",
       0.929
+    ],
+    [
+      "CAIAPÔNIA",
+      0.9287
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "0.8h"
+      "detalhe": "0.9h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5892 var=0.048255"
+      "detalhe": "média=0.5786 var=0.048888"
     },
     {
       "nome": "Distribuição de risco",
