@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-08-31T09:57-03:00",
-  "idade_h": 2.0,
+  "gerado_em": "2026-09-01T08:24-03:00",
+  "idade_h": 1.06,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.5483,
-  "prob_min": 0.0583,
-  "prob_max": 0.9793,
-  "prob_variancia": 0.062704,
+  "prob_media": 0.5141,
+  "prob_min": 0.0431,
+  "prob_max": 0.9751,
+  "prob_variancia": 0.063235,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -18,44 +18,44 @@
   "tudo_zero": false,
   "top_n": [
     [
-      "NIQUELÂNDIA",
-      0.9793
-    ],
-    [
-      "FORMOSA",
-      0.9769
-    ],
-    [
       "CAVALCANTE",
       0.9751
-    ],
-    [
-      "PLANALTINA",
-      0.9682
-    ],
-    [
-      "SÃO JOÃO D'ALIANÇA",
-      0.9681
-    ],
-    [
-      "PADRE BERNARDO",
-      0.9668
-    ],
-    [
-      "CRISTALINA",
-      0.9641
     ],
     [
       "FLORES DE GOIÁS",
       0.9619
     ],
     [
-      "MIMOSO DE GOIÁS",
-      0.9567
-    ],
-    [
       "COLINAS DO SUL",
       0.9538
+    ],
+    [
+      "MINAÇU",
+      0.9508
+    ],
+    [
+      "MINEIROS",
+      0.9453
+    ],
+    [
+      "ALTO PARAÍSO DE GOIÁS",
+      0.9435
+    ],
+    [
+      "SÃO JOÃO D'ALIANÇA",
+      0.942
+    ],
+    [
+      "CRIXÁS",
+      0.9407
+    ],
+    [
+      "MONTE ALEGRE DE GOIÁS",
+      0.9317
+    ],
+    [
+      "SÃO MIGUEL DO ARAGUAIA",
+      0.9305
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "2.0h"
+      "detalhe": "1.1h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.5483 var=0.062704"
+      "detalhe": "média=0.5141 var=0.063235"
     },
     {
       "nome": "Distribuição de risco",
