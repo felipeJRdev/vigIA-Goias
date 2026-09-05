@@ -1,14 +1,14 @@
 {
-  "gerado_em": "2026-09-04T07:47-03:00",
-  "idade_h": 1.26,
+  "gerado_em": "2026-09-05T07:17-03:00",
+  "idade_h": 0.91,
   "n_dias": 5,
   "n_municipios_distintos": 244,
   "cobertura_pct": 100.0,
   "n_celulas_total": 14880,
-  "prob_media": 0.449,
-  "prob_min": 0.0431,
-  "prob_max": 0.9589,
-  "prob_variancia": 0.066217,
+  "prob_media": 0.4699,
+  "prob_min": 0.0448,
+  "prob_max": 0.978,
+  "prob_variancia": 0.070317,
   "pct_baixo": 69.7,
   "pct_medio": 20.1,
   "pct_alto": 10.2,
@@ -18,44 +18,44 @@
   "tudo_zero": false,
   "top_n": [
     [
-      "FORMOSA",
-      0.9304
-    ],
-    [
-      "SÃO DOMINGOS",
-      0.9299
-    ],
-    [
-      "PADRE BERNARDO",
-      0.9277
-    ],
-    [
-      "CAVALCANTE",
-      0.9215
-    ],
-    [
       "FLORES DE GOIÁS",
-      0.9123
+      0.95
     ],
     [
-      "NOVA CRIXÁS",
-      0.9066
-    ],
-    [
-      "NIQUELÂNDIA",
-      0.9059
-    ],
-    [
-      "SÃO MIGUEL DO ARAGUAIA",
-      0.9057
-    ],
-    [
-      "PLANALTINA",
-      0.9047
+      "NOVA ROMA",
+      0.9323
     ],
     [
       "MONTE ALEGRE DE GOIÁS",
-      0.9012
+      0.9152
+    ],
+    [
+      "SÃO DOMINGOS",
+      0.9145
+    ],
+    [
+      "CAVALCANTE",
+      0.8975
+    ],
+    [
+      "ALVORADA DO NORTE",
+      0.8872
+    ],
+    [
+      "FORMOSA",
+      0.8809
+    ],
+    [
+      "PLANALTINA",
+      0.8769
+    ],
+    [
+      "PORANGATU",
+      0.8591
+    ],
+    [
+      "COLINAS DO SUL",
+      0.8571
     ]
   ],
   "status_geral": "OK",
@@ -63,7 +63,7 @@
     {
       "nome": "Frescor do boletim",
       "status": "OK",
-      "detalhe": "1.3h"
+      "detalhe": "0.9h"
     },
     {
       "nome": "Janela de previsão",
@@ -93,7 +93,7 @@
     {
       "nome": "Saída do modelo",
       "status": "OK",
-      "detalhe": "média=0.449 var=0.066217"
+      "detalhe": "média=0.4699 var=0.070317"
     },
     {
       "nome": "Distribuição de risco",
